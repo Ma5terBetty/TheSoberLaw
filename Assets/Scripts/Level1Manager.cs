@@ -39,11 +39,7 @@ public class Level1Manager : MonoBehaviour
             EventManager.OnKilledEnemy -= EnemyKilled;
             GameManager.Instance.ChangeLevel(2);
         }
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-           GameManager.Instance.isLevel1Completed = true;
-        }
+        if (Input.GetKeyDown(KeyCode.Y)) GameManager.Instance.isLevel1Completed = true;
     }
 
     void GetEnemiesAmount()
@@ -59,17 +55,9 @@ public class Level1Manager : MonoBehaviour
     public void EnemyKilled()
     {
         enemiesToDefeat--;
-
-        if (enemyCounter == null)
-        {
-            enemyCounter = GameObject.FindGameObjectWithTag("Counter").GetComponent<Text>();
-        }
+        if (enemyCounter == null) enemyCounter = GameObject.FindGameObjectWithTag("Counter").GetComponent<Text>();
         enemyCounter.text = enemiesToDefeat.ToString();
-
-        if (enemiesToDefeat == 0)
-        {
-            GameManager.Instance.isLevel1Completed = true;
-        }
+        if (enemiesToDefeat == 0) GameManager.Instance.isLevel1Completed = true;
     }
 
     private void OnDisable()

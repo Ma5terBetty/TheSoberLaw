@@ -7,10 +7,8 @@ public class Level2Manager : MonoBehaviour
     [SerializeField]
     Transform[] spawnPoints;
     [SerializeField]
-    GameObject[] enemies;
-    [SerializeField]
     InitialScreen initScreen;
-
+    public Scriptableobject ScriptableObj;
     float enemyTimer;
     float timerChanger;
     float boxTimer;
@@ -30,25 +28,17 @@ public class Level2Manager : MonoBehaviour
         if (counter <= 0)
         {
             initScreen.isLevelEnded = true;
-            if (initScreen.GetComponent<CanvasGroup>().alpha == 1)
-            {
-                GameManager.Instance.ChangeLevel(3);
-            }
+            if (initScreen.GetComponent<CanvasGroup>().alpha == 1) GameManager.Instance.ChangeLevel(3);
         }
 
         if (!GameManager.isGamePaused && initScreen.canvasGroup.alpha <= 0)
         {
             enemyTimer += Time.deltaTime;
             boxTimer += Time.deltaTime;
-
-            if (counter > 0)
-            {
-                counter -= Time.deltaTime;
-            }
-
+            if (counter > 0) counter -= Time.deltaTime;
             if (enemyTimer >= timerChanger)
             {
-                Instantiate(enemies[Mathf.RoundToInt(Random.Range(0, 3))],
+                Instantiate(ScriptableObj.Enemies[Mathf.RoundToInt(Random.Range(0, 3))],
                             spawnPoints[Mathf.RoundToInt(Random.Range(0, 6))].position,
                             transform.rotation);
                 enemyTimer = 0;
@@ -56,7 +46,7 @@ public class Level2Manager : MonoBehaviour
 
             if (boxTimer >= 2)
             {
-                Instantiate(enemies[3],
+                Instantiate(ScriptableObj.Enemies[3],
                             spawnPoints[Mathf.RoundToInt(Random.Range(0, 6))].position,
                             transform.rotation);
                 boxTimer = 0;
@@ -66,9 +56,6 @@ public class Level2Manager : MonoBehaviour
 
     public void EnemyKilled()
     {
-        if (timerChanger > 0.8f)
-        {
-            timerChanger -= 0.1f;
-        }
+        if (timerChanger > 0.8f) timerChanger -= 0.1f;
     }
 }

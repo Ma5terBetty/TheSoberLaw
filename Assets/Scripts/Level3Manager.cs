@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class Level3Manager : MonoBehaviour
 {
-    public GameObject[] bosses;
-
     public Transform[] PatrolPoints;
 
     public GameObject particles;
@@ -24,7 +22,7 @@ public class Level3Manager : MonoBehaviour
     public bool isReturning;
 
     int currentBossStage;
-
+    public Scriptableobject ScriptableObj;
     void Start()
     {
         bossDamage = 0;
@@ -35,9 +33,9 @@ public class Level3Manager : MonoBehaviour
 
         particlesPrefab = particles.GetComponent<ParticleSystem>();
 
-        for (int i = 0; i < bosses.Length; i++)
+        for (int i = 0; i < ScriptableObj.Bosses.Length; i++)
         {
-            bosses[i].SetActive(false);
+            ScriptableObj.Bosses[i].SetActive(false);
         }
     }
     void Update()
@@ -51,27 +49,23 @@ public class Level3Manager : MonoBehaviour
     {
         if (bossDamage >= 100)
         {
-            bosses[2].SetActive(false);
+            ScriptableObj.Bosses[2].SetActive(false);
             GameManager.Instance.isBossDefeated |= true;
             return;
         }
 
         if (bossDamage >= 75)
         {
-            StartCoroutine(BossChanger(bosses[1], bosses[2]));
+            StartCoroutine(BossChanger(ScriptableObj.Bosses[1], ScriptableObj.Bosses[2]));
             return;
         }
         
         if (bossDamage >= 50)
         {
-            StartCoroutine(BossChanger(bosses[0], bosses[1]));
+            StartCoroutine(BossChanger(ScriptableObj.Bosses[0], ScriptableObj.Bosses[1]));
             return;
         }
-
-        if (bossDamage < 50)
-        {
-            bosses[0].SetActive(true);
-        }
+        if (bossDamage < 50) ScriptableObj.Bosses[0].SetActive(true);
     }
 
     void ChangeBoss(GameObject defeatedBoss, GameObject newBoss)

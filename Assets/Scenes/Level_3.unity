@@ -6244,6 +6244,12 @@ PrefabInstance:
       objectReference: {fileID: 1427886749}
     - target: {fileID: 714437448442826875, guid: 2df955531d576f4439b469fa0437eb94,
         type: 3}
+      propertyPath: ScriptableObj
+      value: 
+      objectReference: {fileID: 11400000, guid: 13eb81df58c1f4346a23ab5ad89fea13,
+        type: 2}
+    - target: {fileID: 714437448442826875, guid: 2df955531d576f4439b469fa0437eb94,
+        type: 3}
       propertyPath: bossDamageFill
       value: 
       objectReference: {fileID: 948381839}
