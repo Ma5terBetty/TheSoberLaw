@@ -1717,7 +1717,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558712191}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b33cb65e1bb0a504b92eb8c1551af929, type: 3}
   m_Name: 
@@ -3172,6 +3172,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb7e5c2a9c961eb46b9f2037097382b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseUI: {fileID: 1567237851}
+  gameplayUI: {fileID: 1036814003}
+  defeatScreen: {fileID: 1884184319}
+  timer: {fileID: 1538020247}
+  player: {fileID: 188164566}
+  playerFill: {fileID: 1845142235}
   spawnPoints:
   - {fileID: 825399715}
   - {fileID: 377108966}
@@ -3351,8 +3357,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 558712193}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1225164128}
+        m_TargetAssemblyTypeName: Level2Manager, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
@@ -4154,8 +4160,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 558712193}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1225164128}
+        m_TargetAssemblyTypeName: Level2Manager, Assembly-CSharp
         m_MethodName: Exit
         m_Mode: 1
         m_Arguments:

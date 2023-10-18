@@ -1,9 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Level2Manager : MonoBehaviour
 {
+    #region Level2UI
+    [SerializeField] GameObject pauseUI;
+    [SerializeField] GameObject gameplayUI;
+    [SerializeField] GameObject defeatScreen;
+    [SerializeField] Text timer;
+    [SerializeField] Player player;
+    [SerializeField] Image playerFill;
+    #endregion
     [SerializeField]
     Transform[] spawnPoints;
     [SerializeField]
@@ -14,6 +23,10 @@ public class Level2Manager : MonoBehaviour
     float boxTimer;
     public float counter;
 
+    private void Awake()
+    {
+        defeatScreen = transform.GetChild(2).gameObject; //Level2UI
+    }
     void Start()
     {
         initScreen.isLevelEnded = false;
@@ -21,10 +34,32 @@ public class Level2Manager : MonoBehaviour
         timerChanger = 3;
         enemyTimer = 4;
         EventManager.OnKilledEnemy += EnemyKilled;
+        #region Level2UI
+        defeatScreen = transform.GetChild(2).gameObject;
+        timer.text = "30";
+        gameplayUI.SetActive(true);
+        pauseUI.SetActive(false);
+        defeatScreen.SetActive(false);
+        EventManager.OnPlayerDefeat += DefeatScreen;
+        EventManager.OnHpVariation += RefreshHPBar;
+        #endregion
     }
 
     void Update()
     {
+        #region Level2UI
+        if (!GameManager.isGamePaused)
+        {
+            timer.text = Mathf.RoundToInt(counter).ToString();
+            gameplayUI.SetActive(true);
+            pauseUI.SetActive(false);
+        }
+        else
+        {
+            gameplayUI.SetActive(false);
+            pauseUI.SetActive(true);
+        }
+        #endregion
         if (counter <= 0)
         {
             initScreen.isLevelEnded = true;
@@ -58,4 +93,35 @@ public class Level2Manager : MonoBehaviour
     {
         if (timerChanger > 0.8f) timerChanger -= 0.1f;
     }
+    #region Level2UI
+    void PauseMenu()
+    {
+        gameplayUI.SetActive(!gameplayUI.activeSelf);
+        pauseUI.SetActive(!pauseUI.activeSelf);
+    }
+
+    void DefeatScreen()
+    {
+        if (defeatScreen == null) return;
+        defeatScreen.SetActive(true);
+        EventManager.OnHpVariation -= RefreshHPBar;
+        EventManager.OnPlayerDefeat -= DefeatScreen;
+    }
+
+    public void MainMenu()
+    {
+        EventManager.OnPlayerDefeat -= DefeatScreen;
+        EventManager.OnHpVariation -= RefreshHPBar;
+        GameManager.Instance.LoadMainMenu();
+    }
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
+    void RefreshHPBar()
+    {
+        playerFill.fillAmount = player.PlayerHealth / 100f;
+    }
+    #endregion
 }

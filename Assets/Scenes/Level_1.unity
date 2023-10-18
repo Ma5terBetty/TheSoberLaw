@@ -2039,7 +2039,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.39698505, y: 0.061411858, z: -10}
+  m_LocalPosition: {x: -1.3294663, y: 0.05882764, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6505,10 +6505,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf2e0ea85bd30ac4299b71c2001c12b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameplayUI: {fileID: 602603467}
+  pauseUI: {fileID: 1002592972}
+  defeatScreen: {fileID: 705421402}
+  counter: {fileID: 2048673200}
+  hpFill: {fileID: 1353839161}
   enemiesToDefeat: 0
   levelCompleted: 0
   initScreen: {fileID: 1220670423}
-  player: {fileID: 0}
+  player: {fileID: 1149996689}
   enemyCounter: {fileID: 2048673200}
 --- !u!4 &1345342697
 Transform:
@@ -8708,8 +8713,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1754740182}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1345342696}
+        m_TargetAssemblyTypeName: Level1Manager, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
@@ -9310,7 +9315,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754740177}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15def5e5ca05ba745b2ffdc390c43ae6, type: 3}
   m_Name: 
@@ -10593,8 +10598,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1754740182}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1345342696}
+        m_TargetAssemblyTypeName: Level1Manager, Assembly-CSharp
         m_MethodName: Exit
         m_Mode: 1
         m_Arguments:
