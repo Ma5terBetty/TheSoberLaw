@@ -21,7 +21,7 @@ public class Level1Manager : MonoBehaviour
     void Start()
     {
         #region Level1UI
-        defeatScreen = transform.GetChild(2).gameObject;
+        //defeatScreen = transform.GetChild(2).gameObject;
         gameplayUI.SetActive(true);
         pauseUI.SetActive(false);
         defeatScreen.SetActive(false);

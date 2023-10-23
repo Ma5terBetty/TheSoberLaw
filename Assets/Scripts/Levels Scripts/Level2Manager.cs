@@ -25,7 +25,7 @@ public class Level2Manager : MonoBehaviour
 
     private void Awake()
     {
-        defeatScreen = transform.GetChild(2).gameObject; //Level2UI
+        //defeatScreen = transform.GetChild(2).gameObject; //Level2UI
     }
     void Start()
     {
@@ -35,7 +35,7 @@ public class Level2Manager : MonoBehaviour
         enemyTimer = 4;
         EventManager.OnKilledEnemy += EnemyKilled;
         #region Level2UI
-        defeatScreen = transform.GetChild(2).gameObject;
+        //defeatScreen = transform.GetChild(2).gameObject;
         timer.text = "30";
         gameplayUI.SetActive(true);
         pauseUI.SetActive(false);

@@ -2035,6 +2035,7 @@ MonoBehaviour:
   isLevel1Completed: 0
   isLevel2Completed: 0
   isBossDefeated: 0
+  gameOver: 0
   isLevelStarted: 0
 --- !u!4 &1167593395
 Transform:
