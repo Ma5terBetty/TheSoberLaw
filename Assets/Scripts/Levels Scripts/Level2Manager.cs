@@ -17,7 +17,7 @@ public class Level2Manager : MonoBehaviour
     Transform[] spawnPoints;
     [SerializeField]
     InitialScreen initScreen;
-    public Scriptableobject ScriptableObj;
+    public EnemiesOnLevelData ScriptableObj;
     float enemyTimer;
     float timerChanger;
     float boxTimer;

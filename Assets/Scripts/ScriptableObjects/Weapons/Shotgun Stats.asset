@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0cf3cfdcc841234e9cddd7102e099f8, type: 3}
-  m_Name: Light Enemy Data
+  m_Script: {fileID: 11500000, guid: 72862cfc7830e9f43b04650c3b7927c3, type: 3}
+  m_Name: Shotgun Stats
   m_EditorClassIdentifier: 
-  Enemies: []
-  Bosses: []
   _stats:
-    MaxLife: 0
-    MovementSpeed: 0
+    Damage: 7.5
+    AmmoSpeed: 12
+    FireRate: 0.8
+    BulletsPerShot: 3

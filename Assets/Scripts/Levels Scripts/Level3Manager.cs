@@ -23,7 +23,7 @@ public class Level3Manager : MonoBehaviour
     public int currentDestination;
     public bool isReturning;
     int currentBossStage;
-    public Scriptableobject ScriptableObj;
+    public EnemiesOnLevelData ScriptableObj;
     void Start()
     {
         #region Level3UI

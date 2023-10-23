@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="CharacterStats", menuName ="Stats/Character", order =0)]
-public class CharacterStats : Scriptableobject
+public class CharacterStats : ScriptableObject
 {
     [SerializeField] private CharacterStatValues _stats;
 
