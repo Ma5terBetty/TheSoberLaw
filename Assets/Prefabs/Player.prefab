@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9249a1804985d31428c10faf2554a07f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHp: 0
+  _characterStats: {fileID: 11400000, guid: 75b60bb420b424d4f94b3b5c53032806, type: 2}
 --- !u!114 &4615630745628732948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +232,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e8c05fb2e3047bdb20258b4e40d88c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 5
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _platformLayer:
+    serializedVersion: 2
+    m_Bits: 0
   _jumpForce: 8
   _jumpCooldown: 0.75

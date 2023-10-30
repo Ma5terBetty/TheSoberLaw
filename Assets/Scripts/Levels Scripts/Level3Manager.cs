@@ -90,7 +90,7 @@ public class Level3Manager : MonoBehaviour
 
     void ChangeBoss(GameObject defeatedBoss, GameObject newBoss)
     {
-        if (!newBoss.active)
+        if (!newBoss.activeSelf)
         {
             defeatedBoss.SetActive(false);
             newBoss.SetActive(true);
@@ -99,7 +99,7 @@ public class Level3Manager : MonoBehaviour
 
     IEnumerator BossChanger(GameObject bossDefeated, GameObject newBoss)
     {
-        if (!newBoss.active)
+        if (!newBoss.activeSelf)
         {
             bossDefeated.SetActive(false);
             yield return new WaitForSeconds(2);
@@ -137,7 +137,7 @@ public class Level3Manager : MonoBehaviour
     }
     void RefreshHPBar()
     {
-        playerFill.fillAmount = player.PlayerHealth / 100f;
+        playerFill.fillAmount = player.HealthController.MaxLife / 100f;
     }
     #endregion
 }

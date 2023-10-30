@@ -7,16 +7,20 @@ using UnityEngine.UI;
 using UnityEngine.Animations;
 using Image = UnityEngine.UI.Image;
 
-public class Player : MonoBehaviour
+public class Player : BaseCharacter, IDamageable, IHealeable
 {
-    public float playerHp;
-    private float _maxHp = 100f;
-    
+    #region PUBLIC_PROPERTIES
+    public HealthController HealthController => _healthController;
+    #endregion
+
+    #region PRIVATE_PROPERTIES
+    HealthController _healthController = new HealthController();
+    #endregion
+
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider;
     private Rigidbody2D _rigidBody;
-    
-    public float PlayerHealth { get => playerHp; }
+
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -27,19 +31,20 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        _healthController.Initialize(MaxLife);
+
         ColliderResize();
         if (GameManager.Instance.player == null)
         {
             GameManager.Instance.player = this.gameObject;
         }
 
-        playerHp = _maxHp;
         GameManager.Instance.gameOver = false;
     }
 
     void Update()
     {
-        if (playerHp <= 0)
+        if (HealthController.CurrentLife <= 0)
         {
             EventManager.Instance.PlayerDefeated();
             GameManager.Instance.gameOver = true;
@@ -55,7 +60,7 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.layer == 11)
         {
-            RefreshHealth(-15);
+            GetDamage(15);
             Destroy(other.gameObject);
         }
 
@@ -63,20 +68,14 @@ public class Player : MonoBehaviour
         {
             if (!other.gameObject.GetComponent<BoxScript>().isGrounded)
             {
-                RefreshHealth(-30);
+                GetDamage(30);
                 Destroy(other.gameObject);
             }
         }
 
         if (other.gameObject.CompareTag("Healing"))
         {
-            RefreshHealth(25);
-
-            if (playerHp >= _maxHp)
-            {
-                playerHp = _maxHp;
-            }
-
+            GetHealing(25);
             EventManager.Instance.HpChanged();
             Destroy(other.gameObject);
         }
@@ -93,7 +92,7 @@ public class Player : MonoBehaviour
         {
             if (!other.gameObject.GetComponent<PrefabBullet>().isFromPlayer)
             {
-                RefreshHealth(-5);
+                GetDamage(5);
                 _spriteRenderer.color = Color.red;
                 EventManager.Instance.HpChanged();
                 other.gameObject.GetComponent<PrefabBullet>().DestroyBullet();
@@ -101,14 +100,13 @@ public class Player : MonoBehaviour
        }
     }
 
-    public void RefreshHealth(int value)
+    public void GetDamage(float damageAmount)
     {
-        playerHp += value;
-        if (playerHp > _maxHp)
-        {
-            playerHp = _maxHp;
-        }
+        HealthController.GetDamage(damageAmount);
+    }
 
-        EventManager.Instance.HpChanged();
+    public void GetHealing(float healAmount)
+    {
+        HealthController.GetHealing(healAmount);
     }
 }

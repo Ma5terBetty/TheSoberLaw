@@ -121,7 +121,7 @@ public class Level2Manager : MonoBehaviour
 
     void RefreshHPBar()
     {
-        playerFill.fillAmount = player.PlayerHealth / 100f;
+        playerFill.fillAmount = player.HealthController.MaxLife / 100f;
     }
     #endregion
 }

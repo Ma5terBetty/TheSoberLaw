@@ -10,16 +10,4 @@ public class BaseCharacter : MonoBehaviour
     public int MaxLife => _characterStats.MaxLife;
     public float MovementSpeed => _characterStats.MovementSpeed;
     #endregion
-
-    #region DEFAULT_FUNCTIONS
-    public virtual void Start()
-    {
-        
-    }
-
-    public virtual void Update()
-    {
-        
-    }
-    #endregion
 }

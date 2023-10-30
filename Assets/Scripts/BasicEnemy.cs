@@ -270,7 +270,7 @@ public class BasicEnemy : MonoBehaviour
     }
     void DropHealing() // Otorga vida en caso de detectar que el jugador tiene poca vida.
     {
-        if (player.GetComponent<Player>().playerHp <= 30)
+        if (player.GetComponent<Player>().HealthController.CurrentLife <= 30)
         {
             Instantiate(healingBox, transform.position, transform.rotation);
         }

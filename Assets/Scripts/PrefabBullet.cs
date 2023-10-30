@@ -9,7 +9,7 @@ public class PrefabBullet : MonoBehaviour
     [SerializeField] private float speed;
     SpriteRenderer sr;
     BoxCollider2D bc;
-    AudioSource audio;
+    AudioSource sound;
     public bool isFromPlayer;
     bool isDestroyed;
 
@@ -19,14 +19,14 @@ public class PrefabBullet : MonoBehaviour
     {
         sr = this.gameObject.GetComponent<SpriteRenderer>();
         bc = this.gameObject.GetComponent<BoxCollider2D>();
-        audio = GetComponent<AudioSource>();
+        sound = GetComponent<AudioSource>();
     }
 
     void Start()
     {
         ColliderResize();
         speed = 15f;
-        audio.Play();
+        sound.Play();
         lifeSpawn = 0;
         isDestroyed = false;
     }

@@ -15,13 +15,14 @@ public class PlayerMovement : MonoBehaviour, IMoveable
     #region PRIVATE_PROPERTIES
     private Rigidbody2D _rigidBody;
     private BoxCollider2D _boxCollider;
+    private BaseCharacter _character;
     [Header("Jumping Layers")]
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private LayerMask _platformLayer;
     [Header("Movement Properties")]
-    [SerializeField] private float _movementSpeed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _jumpCooldown = 0.75f;
+    private float _movementSpeed;
     private float _currentJumpCooldown;
     private bool _isJumping;
     #endregion
@@ -31,10 +32,12 @@ public class PlayerMovement : MonoBehaviour, IMoveable
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
+        _character = GetComponent<BaseCharacter>();
     }
     private void Start()
     { 
         _currentJumpCooldown = _jumpCooldown;
+        _movementSpeed = _character.MovementSpeed;
     }
     private void Update()
     {
