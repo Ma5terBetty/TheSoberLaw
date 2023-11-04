@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Level3Manager : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class Level3Manager : MonoBehaviour
     public bool isReturning;
     int currentBossStage;
     public Scriptableobject ScriptableObj;
+    //Menu de pausa
+    [SerializeField] private GameObject botonPausa;
+    [SerializeField] private GameObject menuPausa;
+    private bool juegoPausado = false;
     void Start()
     {
         #region Level3UI
@@ -63,6 +68,11 @@ public class Level3Manager : MonoBehaviour
         #endregion
         if (initScreen.canvasGroup.alpha > 0) return;
         BossSetter();
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (juegoPausado) Reanudar();
+            else Pausa();
+        }
     }
 
     void BossSetter()
@@ -140,4 +150,24 @@ public class Level3Manager : MonoBehaviour
         playerFill.fillAmount = player.PlayerHealth / 100f;
     }
     #endregion
+    public void Pausa()
+    {
+        juegoPausado = true;
+        Time.timeScale = 0f;
+        botonPausa.SetActive(false);
+        menuPausa.SetActive(true);
+    }
+    public void Reanudar()
+    {
+        juegoPausado = false;
+        Time.timeScale = 1f;
+        botonPausa.SetActive(true);
+        menuPausa.SetActive(false);
+    }
+    public void Reiniciar()
+    {
+        juegoPausado = false;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

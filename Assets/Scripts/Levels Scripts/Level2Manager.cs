@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Level2Manager : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class Level2Manager : MonoBehaviour
     float timerChanger;
     float boxTimer;
     public float counter;
+    //Menu de pausa
+    [SerializeField] private GameObject botonPausa;
+    [SerializeField] private GameObject menuPausa;
+    private bool juegoPausado = false;
 
     private void Awake()
     {
@@ -87,6 +92,11 @@ public class Level2Manager : MonoBehaviour
                 boxTimer = 0;
             }
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (juegoPausado) Reanudar();
+            else Pausa();
+        }
     }
 
     public void EnemyKilled()
@@ -124,4 +134,24 @@ public class Level2Manager : MonoBehaviour
         playerFill.fillAmount = player.PlayerHealth / 100f;
     }
     #endregion
+    public void Pausa()
+    {
+        juegoPausado = true;
+        Time.timeScale = 0f;
+        botonPausa.SetActive(false);
+        menuPausa.SetActive(true);
+    }
+    public void Reanudar()
+    {
+        juegoPausado = false;
+        Time.timeScale = 1f;
+        botonPausa.SetActive(true);
+        menuPausa.SetActive(false);
+    }
+    public void Reiniciar()
+    {
+        juegoPausado = false;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
