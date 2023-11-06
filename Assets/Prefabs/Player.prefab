@@ -45,8 +45,8 @@ GameObject:
   - component: {fileID: 4615630745628732942}
   - component: {fileID: 4615630745628732949}
   - component: {fileID: 4615630745628732938}
-  - component: {fileID: 4615630745628732948}
   - component: {fileID: 570549126358465818}
+  - component: {fileID: -8823466380483352335}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -204,22 +204,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterStats: {fileID: 11400000, guid: 75b60bb420b424d4f94b3b5c53032806, type: 2}
---- !u!114 &4615630745628732948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4615630745628732943}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 390a6bade77db4345952cabe9d8d2e47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 897221530804803620, guid: 007d6379f2ef9d34aaa43a726699a19f, type: 3}
-  movementSpeed: 5
-  jump: 8
-  isControlsEnabled: 0
 --- !u!114 &570549126358465818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,11 +216,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e8c05fb2e3047bdb20258b4e40d88c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  _platformLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  _groundLayer: 0
+  _platformLayer: 8
+  _platformsTag: eplat
   _jumpForce: 8
   _jumpCooldown: 0.75
+--- !u!114 &-8823466380483352335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4615630745628732943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a647aa47f165eba4a919be3e5ba25c82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

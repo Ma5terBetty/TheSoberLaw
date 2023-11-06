@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//OBSOLETO
 public class PlayerActions : MonoBehaviour
 {
     SpriteRenderer _spriteRenderer;
@@ -125,10 +127,10 @@ public class PlayerActions : MonoBehaviour
             _animator.SetBool("IsJumping", false);
         }
 
-        if (other.gameObject.CompareTag("eplat") && Input.GetKey(KeyCode.S))
+        /*if (other.gameObject.CompareTag("eplat") && Input.GetKey(KeyCode.S))
         {
             _boxCollider.isTrigger = true;
-        }
+        }*/
     }
     void OnTriggerExit2D(Collider2D other)
     {
