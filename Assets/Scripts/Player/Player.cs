@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.UI;
-using UnityEngine.Animations;
-using Image = UnityEngine.UI.Image;
+﻿using UnityEngine;
 
 public class Player : BaseCharacter, IDamageable, IHealeable
 {
@@ -20,6 +13,7 @@ public class Player : BaseCharacter, IDamageable, IHealeable
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider;
     private Rigidbody2D _rigidBody;
+    [SerializeField] private BaseWeapon _currentWeapon;
 
     void Awake()
     {
@@ -53,6 +47,11 @@ public class Player : BaseCharacter, IDamageable, IHealeable
         if (_spriteRenderer.color != Color.white)
         {
             _spriteRenderer.color += new Color(0, 1, 1, 0) * Time.deltaTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _currentWeapon.Shoot();
         }
     }
 
@@ -108,5 +107,10 @@ public class Player : BaseCharacter, IDamageable, IHealeable
     public void GetHealing(float healAmount)
     {
         HealthController.GetHealing(healAmount);
+    }
+
+    private void PickupWeapon()
+    { 
+        
     }
 }

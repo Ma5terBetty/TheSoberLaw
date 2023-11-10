@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pistol : BaseWeapon
+public class Shotgun : BaseWeapon
 {
     private void Start()
     {
@@ -26,7 +26,7 @@ public class Pistol : BaseWeapon
     }
 
     private bool IsShootAvailable()
-    { 
+    {
         return shootingCooldown >= Stats.FireCooldwon;
     }
 }

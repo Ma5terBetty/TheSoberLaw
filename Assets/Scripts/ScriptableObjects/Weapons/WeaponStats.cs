@@ -8,14 +8,16 @@ public class WeaponStats : ScriptableObject
     public float Damage => _stats.Damage;
     public float AmmoSpeed => _stats.AmmoSpeed;
     public float FireRate => _stats.FireRate;
+    public float FireCooldwon => _stats.FireCooldown;
     public int BulletsPerShot => _stats.BulletsPerShot;
 }
 
 [System.Serializable]
 public struct WeaponStatsValues
 {
-    public float Damage;
-    public float AmmoSpeed;
-    public float FireRate;
-    public int BulletsPerShot;
+    public float Damage; // Daño del arma
+    public float AmmoSpeed; // Velocidad de munición
+    public float FireRate; // Frecuencia de disparos
+    public float FireCooldown; // Tiempo entre disparos
+    public int BulletsPerShot; // Balas emitidas por disparo
 }
