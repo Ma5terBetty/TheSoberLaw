@@ -1,3 +1,5 @@
+using UnityEditor;
+using UnityEditor.TerrainTools;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WeaponStats", menuName ="Stats/Weapon", order =1)]
@@ -10,6 +12,8 @@ public class WeaponStats : ScriptableObject
     public float FireRate => _stats.FireRate;
     public float FireCooldwon => _stats.FireCooldown;
     public int BulletsPerShot => _stats.BulletsPerShot;
+    public Sprite Sprite => _stats.Weapon;
+
 }
 
 [System.Serializable]
@@ -20,4 +24,5 @@ public struct WeaponStatsValues
     public float FireRate; // Frecuencia de disparos
     public float FireCooldown; // Tiempo entre disparos
     public int BulletsPerShot; // Balas emitidas por disparo
+    public Sprite Weapon;
 }

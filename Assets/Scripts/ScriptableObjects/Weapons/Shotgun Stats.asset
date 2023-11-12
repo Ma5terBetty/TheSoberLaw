@@ -16,4 +16,6 @@ MonoBehaviour:
     Damage: 7.5
     AmmoSpeed: 12
     FireRate: 0.8
+    FireCooldown: 0
     BulletsPerShot: 3
+    Weapon: {fileID: 21300000, guid: 29bbd54963b7cb7448cefacfd7dea574, type: 3}
