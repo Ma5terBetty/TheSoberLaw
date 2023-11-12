@@ -118,7 +118,7 @@ public class BossShotgun : MonoBehaviour
             for (int i = 0; i < 3; i++)
             {
                 PrefabBullet enemyBullet = Instantiate(_prefabBullet, _noozle.position, transform.rotation);
-                enemyBullet.isFromPlayer = false;
+                //enemyBullet.IsFromPlayer = false;
                 enemyBullet.transform.Rotate(new Vector3(0, 0, -30));
                 enemyBullet.transform.Rotate(new Vector3(0, 0, 30 * i));
                 _attackCooldown = 0;
@@ -213,7 +213,7 @@ public class BossShotgun : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PrefabBullet>() != null)
         {
-            if (collision.gameObject.GetComponent<PrefabBullet>().isFromPlayer)
+            if (collision.gameObject.GetComponent<PrefabBullet>().IsFromPlayer)
             {
                 _bossController.LifeUpdate(1);
                 _spriteRenderer.color = Color.red;

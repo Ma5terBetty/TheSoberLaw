@@ -29,7 +29,7 @@ public class EnemyAttack : MonoBehaviour
     void ShootPistol(Vector3 origin)
     {
         PrefabBullet enemyBullet = Instantiate(bullet, origin, transform.rotation);
-        enemyBullet.isFromPlayer = false;
+        //enemyBullet.IsFromPlayer = false;
     }
 
     void ShootPump(Vector3 origin)
@@ -37,7 +37,7 @@ public class EnemyAttack : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             PrefabBullet enemyBullet = Instantiate(bullet, origin, transform.rotation);
-            enemyBullet.isFromPlayer = false;
+            //enemyBullet.IsFromPlayer = false;
             enemyBullet.transform.Rotate(new Vector3(0, 0, -30));
             enemyBullet.transform.Rotate(new Vector3(0, 0, 30 * i));
         }
@@ -46,7 +46,7 @@ public class EnemyAttack : MonoBehaviour
     void ShootSubmachine(Vector3 origin)
     {
         PrefabBullet enemyBullet = Instantiate(bullet, origin, transform.rotation);
-        enemyBullet.isFromPlayer = false;
+        //enemyBullet.IsFromPlayer = false;
         enemyBullet.transform.Rotate(new Vector3(0, 0, Random.Range(-30, 30)));
     }
 }

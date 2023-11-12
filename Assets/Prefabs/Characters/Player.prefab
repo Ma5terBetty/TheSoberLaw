@@ -204,6 +204,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterStats: {fileID: 11400000, guid: 75b60bb420b424d4f94b3b5c53032806, type: 2}
+  _currentWeapon: {fileID: 4292903054992576435, guid: f8699ba13963f8c47bba6c8b4ec0b656,
+    type: 3}
 --- !u!114 &570549126358465818
 MonoBehaviour:
   m_ObjectHideFlags: 0

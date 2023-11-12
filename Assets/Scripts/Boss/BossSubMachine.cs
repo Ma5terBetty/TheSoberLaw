@@ -115,7 +115,7 @@ public class BossSubMachine : MonoBehaviour
             if (burstDelay >= 0.1f)
             {
                 PrefabBullet enemyBullet = Instantiate(prefabBullet, noozle.position, transform.rotation);
-                enemyBullet.isFromPlayer = false;
+                //enemyBullet.IsFromPlayer = false;
                 enemyBullet.transform.Rotate(new Vector3(0, 0, Random.Range(-30, 30)));
                 burstDelay = 0;
                 anim.SetBool("IsAttacking", true);
@@ -205,7 +205,7 @@ public class BossSubMachine : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PrefabBullet>() != null)
         {
-            if (collision.gameObject.GetComponent<PrefabBullet>().isFromPlayer)
+            if (collision.gameObject.GetComponent<PrefabBullet>().IsFromPlayer)
             {
                 bossController.LifeUpdate(1);
                 sr.color = Color.red;

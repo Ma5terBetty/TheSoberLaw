@@ -19,7 +19,8 @@ public class Pistol : BaseWeapon
     {
         if (IsShootAvailable())
         {
-            PrefabBullet enemyBullet = Instantiate(Bullet, Noozle.position, transform.rotation);
+            PrefabBullet bullet = Instantiate(Bullet, Noozle.position, transform.rotation);
+            //bullet.SetBullet();
         }
     }
 

@@ -116,7 +116,7 @@ public class BossPistol : MonoBehaviour
         if (attackCooldown >= 0.5f)
         {
             PrefabBullet enemyBullet = Instantiate(prefabBullet, noozle.position, transform.rotation);
-            enemyBullet.isFromPlayer = false;
+            //enemyBullet.IsFromPlayer = false;
             attackCooldown = 0;
             anim.SetBool("IsAttacking", true);
         }
@@ -190,7 +190,7 @@ public class BossPistol : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PrefabBullet>() != null)
         {
-            if (collision.gameObject.GetComponent<PrefabBullet>().isFromPlayer)
+            if (collision.gameObject.GetComponent<PrefabBullet>().IsFromPlayer)
             {
                 bossController.LifeUpdate(1);
                 sr.color = Color.red;

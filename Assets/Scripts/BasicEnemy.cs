@@ -202,7 +202,7 @@ public class BasicEnemy : MonoBehaviour
             if (burstDelay >= 0.1f)
             {
                 PrefabBullet enemyBullet = Instantiate(bulletPrefab, castingTransform.position, transform.rotation);
-                enemyBullet.isFromPlayer = false;
+              //  enemyBullet.IsFromPlayer = false;
                 enemyBullet.transform.Rotate(new Vector3(0, 0, Random.Range(-30, 30)));
                 burstDelay = 0;
             }
@@ -220,7 +220,7 @@ public class BasicEnemy : MonoBehaviour
         if (attackCooldown >= 0.5f)
         {
             PrefabBullet enemyBullet = Instantiate(bulletPrefab, castingTransform.position, transform.rotation);
-            enemyBullet.isFromPlayer = false;
+            //enemyBullet.IsFromPlayer = false;
             attackCooldown = 0;
         }
     }
@@ -231,7 +231,7 @@ public class BasicEnemy : MonoBehaviour
             for (int i = 0; i < 3; i++)
             {
                 PrefabBullet enemyBullet = Instantiate(bulletPrefab, castingTransform.position, transform.rotation);
-                enemyBullet.isFromPlayer = false;
+                //enemyBullet.IsFromPlayer = false;
                 enemyBullet.transform.Rotate(new Vector3(0, 0, -30));
                 enemyBullet.transform.Rotate(new Vector3(0, 0, 30 * i));
                 attackCooldown = 0;
@@ -302,7 +302,7 @@ public class BasicEnemy : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PrefabBullet>() != null)
         {
-            if (collision.gameObject.GetComponent<PrefabBullet>().isFromPlayer)
+            if (collision.gameObject.GetComponent<PrefabBullet>().IsFromPlayer)
             {
                 currentLife -= 25;
                 sr.color = Color.red;

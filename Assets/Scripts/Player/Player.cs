@@ -1,32 +1,34 @@
 ﻿using UnityEngine;
 
-public class Player : BaseCharacter, IDamageable, IHealeable
+public class Player : BaseCharacter, IDamageable, IHealeable, IShooter
 {
     #region PUBLIC_PROPERTIES
     public HealthController HealthController => _healthController;
+    public BaseWeapon BaseWeapon => _currentWeapon;
+    public bool IsPlayer() => _isPlayer;
     #endregion
 
     #region PRIVATE_PROPERTIES
-    HealthController _healthController = new HealthController();
-    #endregion
-
+    [SerializeField] private BaseWeapon _currentWeapon;
+    private HealthController _healthController = new HealthController();
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider;
     private Rigidbody2D _rigidBody;
-    [SerializeField] private BaseWeapon _currentWeapon;
+    #endregion
 
+    #region UNITY_FUNCTIONS
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _rigidBody = GetComponent<Rigidbody2D>();
-        _rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        _isPlayer = GetComponent<Player>() == null ? false : true;
     }
 
     private void Start()
     {
         _healthController.Initialize(MaxLife);
-
+        _rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         ColliderResize();
         if (GameManager.Instance.player == null)
         {
@@ -51,7 +53,7 @@ public class Player : BaseCharacter, IDamageable, IHealeable
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _currentWeapon.Shoot();
+            Shoot();
         }
     }
 
@@ -79,7 +81,12 @@ public class Player : BaseCharacter, IDamageable, IHealeable
             Destroy(other.gameObject);
         }
     }
+    #endregion
 
+    #region CUSTOM_FUNCTIONS
+    /// <summary>
+    /// Rezises the collider with the sprite dimensions
+    /// </summary>
     private void ColliderResize()
     {
         Vector2 colliderSize = _spriteRenderer.bounds.size;
@@ -89,7 +96,7 @@ public class Player : BaseCharacter, IDamageable, IHealeable
     {
        if (other.gameObject.GetComponent<PrefabBullet>() != null)
         {
-            if (!other.gameObject.GetComponent<PrefabBullet>().isFromPlayer)
+            if (!other.gameObject.GetComponent<PrefabBullet>().IsFromPlayer)
             {
                 GetDamage(5);
                 _spriteRenderer.color = Color.red;
@@ -113,4 +120,10 @@ public class Player : BaseCharacter, IDamageable, IHealeable
     { 
         
     }
+
+    public void Shoot()
+    {
+        _currentWeapon.Shoot();
+    }
+    #endregion
 }

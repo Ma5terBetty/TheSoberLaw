@@ -72,13 +72,13 @@ public class PlayerActions : MonoBehaviour
             if (spriteMode)
             {
                 PrefabBullet playerBullet = Instantiate(bullet, transform.position + new Vector3(-0.5f, 0.25f, 0), new Quaternion(transform.rotation.x, transform.rotation.y + 180, transform.rotation.z, transform.position.magnitude));
-                playerBullet.isFromPlayer = true;
+                //playerBullet.IsFromPlayer = true;
                 shootDelay = 0;
             }
             else
             {
                 PrefabBullet playerBullet = Instantiate(bullet, transform.position + new Vector3(0.5f, 0.25f, 0), Quaternion.identity);
-                playerBullet.isFromPlayer = true;
+                //playerBullet.IsFromPlayer = true;
                 shootDelay = 0;
             }
         }

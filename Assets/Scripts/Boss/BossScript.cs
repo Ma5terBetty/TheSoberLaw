@@ -74,7 +74,7 @@ public class BossScript : MonoBehaviour
                     if (attackTimer >= attackCooldown)
                     {
                         PrefabBullet enemyBullet = Instantiate(bulletPrefab, noozle.position, transform.rotation);
-                        enemyBullet.isFromPlayer = false;
+                        //enemyBullet.IsFromPlayer = false;
                         attackTimer = 0;
                     }
             break;
@@ -85,7 +85,7 @@ public class BossScript : MonoBehaviour
                         for (int i = 0; i < 3; i++)
                         {
                             PrefabBullet enemyBullet = Instantiate(bulletPrefab, noozle.position, transform.rotation);
-                            enemyBullet.isFromPlayer = false;
+                            //enemyBullet.IsFromPlayer = false;
                             enemyBullet.transform.Rotate(new Vector3(0, 0, -30));
                             enemyBullet.transform.Rotate(new Vector3(0, 0, 30 * i));
                             attackCooldown = 0;
@@ -101,7 +101,7 @@ public class BossScript : MonoBehaviour
                         if (burstDelay >= 0.1f)
                         {
                             PrefabBullet enemyBullet = Instantiate(bulletPrefab, noozle.position, transform.rotation);
-                            enemyBullet.isFromPlayer = false;
+                            //enemyBullet.IsFromPlayer = false;
                             enemyBullet.transform.Rotate(new Vector3(0, 0, Random.Range(-30, 30)));
                             burstDelay = 0;
                         }
@@ -135,7 +135,7 @@ public class BossScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<PrefabBullet>().isFromPlayer)
+        if (collision.gameObject.GetComponent<PrefabBullet>().IsFromPlayer)
         {
             Destroy(collision.gameObject);
 

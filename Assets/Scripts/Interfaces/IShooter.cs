@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public interface IShooteable
+public interface IShooter
 {
     BaseWeapon BaseWeapon { get; }
     void Shoot();
+    bool IsPlayer();
 }
