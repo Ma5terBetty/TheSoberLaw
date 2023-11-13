@@ -51,7 +51,7 @@ public class Player : BaseCharacter, IDamageable, IHealeable, IShooter
             _spriteRenderer.color += new Color(0, 1, 1, 0) * Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             Shoot();
         }
@@ -123,7 +123,7 @@ public class Player : BaseCharacter, IDamageable, IHealeable, IShooter
 
     public void Shoot()
     {
-        _currentWeapon.Shoot();
+        _currentWeapon.Shoot(true);
     }
     #endregion
 }
