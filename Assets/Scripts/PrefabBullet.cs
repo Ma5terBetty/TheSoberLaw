@@ -28,7 +28,7 @@ public class PrefabBullet : MonoBehaviour
     void Start()
     {
         ColliderResize();
-        _speed = 15f;
+        //_speed = 15f;
         sound.Play();
         _lifeSpawn = 0;
         _isDestroyed = false;
@@ -70,6 +70,7 @@ public class PrefabBullet : MonoBehaviour
         _isFromPlayer = isFromPlayer;
         _damageAmount = damageAmount;
         _speed = speed;
+        _boxCollider.enabled = true;
     }
 }
 

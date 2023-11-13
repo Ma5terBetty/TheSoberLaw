@@ -26,7 +26,7 @@ public class BasicEnemy : MonoBehaviour
     bool isInRange;
     bool isOnAir;
 
-    int currentLife;
+    float currentLife;
 
     float attackCooldown;
     float playerDistance = 7;
@@ -300,11 +300,12 @@ public class BasicEnemy : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<PrefabBullet>() != null)
+        var bullet = collision.gameObject.GetComponent<PrefabBullet>();
+        if (bullet != null)
         {
-            if (collision.gameObject.GetComponent<PrefabBullet>().IsFromPlayer)
+            if (bullet.IsFromPlayer)
             {
-                currentLife -= 25;
+                currentLife -= bullet.DamageAmount;
                 sr.color = Color.red;
 
                 collision.gameObject.GetComponent<PrefabBullet>().DestroyBullet();
