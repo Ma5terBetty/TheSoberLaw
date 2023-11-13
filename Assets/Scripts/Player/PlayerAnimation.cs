@@ -29,11 +29,13 @@ public class PlayerAnimation : MonoBehaviour
 
             if (aux > 0)
             { 
-                _spriteRenderer.flipX = false;
+                //_spriteRenderer.flipX = false;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
             }
             else if (aux < 0)
             {
-                _spriteRenderer.flipX = true;
+                //_spriteRenderer.flipX = true;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
             }
         }
     }
