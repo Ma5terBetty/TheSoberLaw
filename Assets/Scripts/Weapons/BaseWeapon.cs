@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class BaseWeapon : MonoBehaviour
 {
-    [SerializeField] private WeaponStats _stats;
+    [SerializeField] private WeaponStats _weaponStats;
     [SerializeField] private PrefabBullet _bullet;
     [SerializeField] private Transform _noozle;
 
     protected PrefabBullet Bullet => _bullet;
-    protected WeaponStats Stats => _stats;
+    protected WeaponStats Stats => _weaponStats;
     protected Transform Noozle => _noozle;
     protected float shootingCooldown;
+    protected float bulletBurst;
 
-    public virtual void Shoot()
+    public virtual void Shoot(bool isPlayerShooting)
     { 
         
     }

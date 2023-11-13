@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class Submachine : BaseWeapon
+public class Revolver : BaseWeapon
 {
-    [SerializeField] private float bulletSpreadAngle;
     private int bulletIndex;
 
     private void Start()
@@ -11,6 +10,7 @@ public class Submachine : BaseWeapon
         bulletBurst = 0;
         bulletIndex = 0;
     }
+
     private void Update()
     {
         if (shootingCooldown < Stats.FireCooldown && bulletIndex < Stats.BulletsPerShot)
@@ -22,15 +22,15 @@ public class Submachine : BaseWeapon
             bulletBurst += Time.deltaTime;
         }
     }
+
     public override void Shoot(bool isPlayerShooting)
     {
         if (IsShootAvailable())
-        {
+        { 
             if (bulletBurst >= Stats.FireRate)
             {
                 PrefabBullet bullet = Instantiate(Bullet, Noozle.position, transform.rotation);
                 bullet.SetBullet(isPlayerShooting, Stats.Damage, Stats.AmmoSpeed);
-                bullet.transform.Rotate(new Vector3(0, 0, Random.Range(-bulletSpreadAngle, bulletSpreadAngle)));
                 bulletBurst = 0;
                 bulletIndex++;
 
@@ -43,6 +43,7 @@ public class Submachine : BaseWeapon
             }
         }
     }
+
     private bool IsShootAvailable()
     {
         return shootingCooldown >= Stats.FireCooldown;

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8738913635598569668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8455070811864674807}
+  m_Layer: 0
+  m_Name: Noozle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8455070811864674807
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738913635598569668}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.943, y: 0.408, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6808831162753476678}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8748015506049334211
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,9 +58,10 @@ Transform:
   m_GameObject: {fileID: 8748015506049334211}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8455070811864674807}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -74,8 +106,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5402412272178277761, guid: eb08d8ca2cab94646850fdc6f85f188c,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 29bbd54963b7cb7448cefacfd7dea574, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,6 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5123d1d7995ba47a7c85ad15f62fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 11400000, guid: 8078071621f07cf4eadbb887c113aa7b, type: 2}
-  _bullet: {fileID: 0}
-  _noozle: {fileID: 0}
+  _weaponStats: {fileID: 11400000, guid: 8078071621f07cf4eadbb887c113aa7b, type: 2}
+  _bullet: {fileID: 897221530804803620, guid: 007d6379f2ef9d34aaa43a726699a19f, type: 3}
+  _noozle: {fileID: 8455070811864674807}

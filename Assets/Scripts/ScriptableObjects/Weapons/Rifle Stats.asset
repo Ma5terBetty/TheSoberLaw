@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stats:
     Damage: 10
-    AmmoSpeed: 20
-    FireRate: 1.2
-    FireCooldown: 0
+    AmmoSpeed: 40
+    FireCooldown: 1.2
+    FireRate: 0
     BulletsPerShot: 1
     Weapon: {fileID: 21300000, guid: b62688b798d310b4b90d0881b18bb77b, type: 3}

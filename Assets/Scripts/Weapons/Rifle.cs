@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Pistol : BaseWeapon
+public class Rifle : BaseWeapon
 {
     private void Start()
     {
@@ -26,7 +26,7 @@ public class Pistol : BaseWeapon
     }
 
     private bool IsShootAvailable()
-    { 
+    {
         return shootingCooldown >= Stats.FireCooldown;
     }
 }
