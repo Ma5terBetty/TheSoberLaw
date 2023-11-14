@@ -200,6 +200,7 @@ public class BossPistol : MonoBehaviour
     }
     void OnDisable()
     {
+        if (part == null) return;
         part.gameObject.transform.position = transform.position;
         part.Play();
     }
