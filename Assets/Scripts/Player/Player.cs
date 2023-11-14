@@ -28,10 +28,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         ColliderResize();
-        if (GameManager.Instance.player == null)
-        {
-            GameManager.Instance.player = this.gameObject;
-        }
+        //if (GameManager.Instance.player == null) GameManager.Instance.player = this.gameObject;
+
 
         playerHp = _maxHp;
         GameManager.Instance.gameOver = false;
@@ -41,7 +39,7 @@ public class Player : MonoBehaviour
     {
         if (playerHp <= 0)
         {
-            EventManager.Instance.PlayerDefeated();
+            //EventManager.Instance.PlayerDefeated();
             GameManager.Instance.gameOver = true;
         }
 

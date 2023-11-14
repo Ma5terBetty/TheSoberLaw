@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class Level2Manager : MonoBehaviour
 {
     #region Level2UI
-    [SerializeField] GameObject pauseUI;
     [SerializeField] GameObject gameplayUI;
     [SerializeField] GameObject defeatScreen;
     [SerializeField] Text timer;
@@ -43,7 +42,6 @@ public class Level2Manager : MonoBehaviour
         //defeatScreen = transform.GetChild(2).gameObject;
         timer.text = "30";
         gameplayUI.SetActive(true);
-        pauseUI.SetActive(false);
         defeatScreen.SetActive(false);
         EventManager.OnPlayerDefeat += DefeatScreen;
         EventManager.OnHpVariation += RefreshHPBar;
@@ -57,12 +55,10 @@ public class Level2Manager : MonoBehaviour
         {
             timer.text = Mathf.RoundToInt(counter).ToString();
             gameplayUI.SetActive(true);
-            pauseUI.SetActive(false);
         }
         else
         {
             gameplayUI.SetActive(false);
-            pauseUI.SetActive(true);
         }
         #endregion
         if (counter <= 0)
@@ -104,11 +100,7 @@ public class Level2Manager : MonoBehaviour
         if (timerChanger > 0.8f) timerChanger -= 0.1f;
     }
     #region Level2UI
-    void PauseMenu()
-    {
-        gameplayUI.SetActive(!gameplayUI.activeSelf);
-        pauseUI.SetActive(!pauseUI.activeSelf);
-    }
+    
 
     void DefeatScreen()
     {
@@ -126,7 +118,8 @@ public class Level2Manager : MonoBehaviour
     }
     public void Exit()
     {
-        Application.Quit();
+        SceneManager.LoadScene(0);
+        //Application.Quit();
     }
 
     void RefreshHPBar()

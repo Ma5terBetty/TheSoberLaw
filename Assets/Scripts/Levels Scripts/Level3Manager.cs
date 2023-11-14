@@ -8,7 +8,6 @@ public class Level3Manager : MonoBehaviour
 {
     #region Level3UI
     [SerializeField] GameObject gameplayUI;
-    [SerializeField] GameObject pauseUI;
     [SerializeField] GameObject defeatScreen;
     [SerializeField] GameObject winnerScreen;
     [SerializeField] Player player;
@@ -33,7 +32,6 @@ public class Level3Manager : MonoBehaviour
     {
         #region Level3UI
         gameplayUI.SetActive(true);
-        pauseUI.SetActive(false);
         defeatScreen.SetActive(false);
         winnerScreen.SetActive(false);
         bossLife.fillAmount = 1f;
@@ -55,16 +53,9 @@ public class Level3Manager : MonoBehaviour
         #region Level3UI
         if (GameManager.Instance.isBossDefeated) winnerScreen.SetActive(true);
         bossLife.fillAmount = 1 - bossDamage / 100f;
-        if (GameManager.isGamePaused)
-        {
-            gameplayUI.SetActive(false);
-            pauseUI.SetActive(true);
-        }
-        else
-        {
-            gameplayUI.SetActive(true);
-            pauseUI.SetActive(false);
-        }
+        if (GameManager.isGamePaused) gameplayUI.SetActive(false);
+        else gameplayUI.SetActive(true);
+
         #endregion
         if (initScreen.canvasGroup.alpha > 0) return;
         BossSetter();
@@ -125,7 +116,6 @@ public class Level3Manager : MonoBehaviour
     void PauseMenu()
     {
         gameplayUI.SetActive(!gameplayUI.activeSelf);
-        pauseUI.SetActive(!pauseUI.activeSelf);
     }
     void DefeatScreen()
     {
@@ -143,7 +133,7 @@ public class Level3Manager : MonoBehaviour
     }
     public void Exit()
     {
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
     void RefreshHPBar()
     {

@@ -8,7 +8,6 @@ public class Level1Manager : MonoBehaviour
 {
     #region Level1UI
     [SerializeField] GameObject gameplayUI;
-    [SerializeField] GameObject pauseUI;
     [SerializeField] GameObject defeatScreen;
     [SerializeField] Text counter;
     public Image hpFill;
@@ -28,7 +27,6 @@ public class Level1Manager : MonoBehaviour
         #region Level1UI
         //defeatScreen = transform.GetChild(2).gameObject;
         gameplayUI.SetActive(true);
-        pauseUI.SetActive(false);
         defeatScreen.SetActive(false);
         EventManager.OnPlayerDefeat += DefeatScreen;
         EventManager.OnHpVariation += RefreshHPBar;
@@ -43,20 +41,6 @@ public class Level1Manager : MonoBehaviour
 
     void Update()
     {
-        #region Level1UI
-        if (GameManager.isGamePaused)
-        {
-            gameplayUI.SetActive(false);
-            pauseUI.SetActive(true);
-        }
-        else
-        {
-            gameplayUI.SetActive(true);
-            pauseUI.SetActive(false);
-        }
-        #endregion
-
-
         if (initScreen.canvasGroup.alpha == 1 && GameManager.Instance.isLevel1Completed)
         {
             EventManager.OnKilledEnemy -= EnemyKilled;
@@ -74,11 +58,8 @@ public class Level1Manager : MonoBehaviour
     void GetEnemiesAmount()
     {
         enemiesToDefeat = 0;
-
         for (int i = 0; i <= enemiesOnStage.Length - 1; i++)
-        {
             enemiesToDefeat++;
-        }
     }
 
     public void EnemyKilled()
@@ -99,12 +80,6 @@ public class Level1Manager : MonoBehaviour
         EventManager.OnKilledEnemy -= EnemyKilled;
     }
     #region Level1UI
-    void PauseMenu()
-    {
-        if (gameplayUI == null) return;
-        gameplayUI.SetActive(!gameplayUI.activeSelf);
-        pauseUI.SetActive(!pauseUI.activeSelf);
-    }
     void DefeatScreen()
     {
         if (defeatScreen == null) return;
@@ -121,7 +96,8 @@ public class Level1Manager : MonoBehaviour
     }
     public void Exit()
     {
-        Application.Quit();
+        SceneManager.LoadScene(0);
+        //Application.Quit();
     }
 
     void RefreshHPBar()
