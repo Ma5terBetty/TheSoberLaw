@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        FindPlayer();
         startPos = GameObject.FindGameObjectWithTag("StartPos").GetComponent<Transform>().position;
 
         currentScene = SceneManager.GetActiveScene();
@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
     {
         Unpause();
         SceneManager.LoadScene(scene);
+        
     }
     /// <summary>
     /// Finds player's prefab on the current scene.
@@ -122,6 +123,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("OnSceneLoaded: " + scene.name);
         Debug.Log(mode);
+        FindPlayer();
     }
     void OnDisable()
     {
