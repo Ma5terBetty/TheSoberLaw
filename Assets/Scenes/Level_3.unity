@@ -1849,6 +1849,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652818668}
   m_CullTransparentMesh: 0
+--- !u!1 &652909678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 652909680}
+  - component: {fileID: 652909679}
+  m_Layer: 0
+  m_Name: BossObserver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &652909679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652909678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f388f72121260a48ba9d4b5e3d80bf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winnerScreen: {fileID: 2078420626}
+--- !u!4 &652909680
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652909678}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 338.39398, y: 174.85739, z: 2.3980145}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &667948247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2252,6 +2297,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 605508658}
     m_Modifications:
+    - target: {fileID: 674722498346103385, guid: 1c4d8b4ce46e73f44805dd93827dc657,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 18.3
+      objectReference: {fileID: 0}
     - target: {fileID: 1643570383201486372, guid: 1c4d8b4ce46e73f44805dd93827dc657,
         type: 3}
       propertyPath: m_RootOrder
@@ -5487,7 +5537,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 714437446812409566}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 714437446812409567}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eeac0f39c38bcfc40a13813c55212154, type: 3}
@@ -6419,6 +6469,11 @@ PrefabInstance:
       objectReference: {fileID: 250583982}
     - target: {fileID: 714437448442826875, guid: 2df955531d576f4439b469fa0437eb94,
         type: 3}
+      propertyPath: bossObserver
+      value: 
+      objectReference: {fileID: 652909679}
+    - target: {fileID: 714437448442826875, guid: 2df955531d576f4439b469fa0437eb94,
+        type: 3}
       propertyPath: defeatScreen
       value: 
       objectReference: {fileID: 1195713813}
@@ -6455,6 +6510,24 @@ PrefabInstance:
       objectReference: {fileID: 1333035065}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2df955531d576f4439b469fa0437eb94, type: 3}
+--- !u!1 &714437446812409567 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 714437448442826874, guid: 2df955531d576f4439b469fa0437eb94,
+    type: 3}
+  m_PrefabInstance: {fileID: 714437446812409566}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &714437446812409569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714437446812409567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fea686d20348f684e96604d477015524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8163111786362274872
 PrefabInstance:
   m_ObjectHideFlags: 0

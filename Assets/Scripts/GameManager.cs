@@ -64,17 +64,7 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (GameManager.isGamePaused)
-            {
-                Unpause();
-            }
-            else
-            {
-                Pause();
-            }
-        }
+        
     }
     /// <summary>
     /// Pauses the game by setting the Time.timeScale from 1f to 0f.
