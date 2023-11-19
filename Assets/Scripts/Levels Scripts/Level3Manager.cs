@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +9,7 @@ public class Level3Manager : MonoBehaviour
     #region Level3UI
     [SerializeField] GameObject gameplayUI;
     [SerializeField] GameObject defeatScreen;
+    [SerializeField] GameObject winnerScreen;
     [SerializeField] Player player;
     [SerializeField] Image bossLife;
     [SerializeField] Image playerFill;
@@ -28,15 +28,12 @@ public class Level3Manager : MonoBehaviour
     [SerializeField] private GameObject botonPausa;
     [SerializeField] private GameObject menuPausa;
     private bool juegoPausado = false;
-
-    public BossObserver bossObserver;
-    
-    public event EventHandler<BossDeathEvent> OnBossDeath;
     void Start()
     {
         #region Level3UI
         gameplayUI.SetActive(true);
         defeatScreen.SetActive(false);
+        winnerScreen.SetActive(false);
         bossLife.fillAmount = 1f;
         EventManager.OnPlayerDefeat += DefeatScreen;
         EventManager.OnHpVariation += RefreshHPBar;
@@ -47,13 +44,14 @@ public class Level3Manager : MonoBehaviour
         GameManager.Instance.isBossDefeated = false;
         particlesPrefab = particles.GetComponent<ParticleSystem>();
         for (int i = 0; i < ScriptableObj.Bosses.Length; i++)
+        {
             ScriptableObj.Bosses[i].SetActive(false);
-
+        }
     }
     void Update()
     {
         #region Level3UI
-        //if (GameManager.Instance.isBossDefeated) winnerScreen.SetActive(true);
+        if (GameManager.Instance.isBossDefeated) winnerScreen.SetActive(true);
         bossLife.fillAmount = 1 - bossDamage / 100f;
         if (GameManager.isGamePaused) gameplayUI.SetActive(false);
         else gameplayUI.SetActive(true);
@@ -73,8 +71,7 @@ public class Level3Manager : MonoBehaviour
         if (bossDamage >= 100)
         {
             ScriptableObj.Bosses[2].SetActive(false);
-            Die();
-            //GameManager.Instance.isBossDefeated |= true; // Lo que hace cuando el jefe esta derrotado
+            GameManager.Instance.isBossDefeated |= true;
             return;
         }
 
@@ -162,11 +159,5 @@ public class Level3Manager : MonoBehaviour
         juegoPausado = false;
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    //Observer
-    public void Die()
-    {
-        OnBossDeath?.Invoke(this, new BossDeathEvent(true));
     }
 }
