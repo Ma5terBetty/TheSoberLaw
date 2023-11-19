@@ -2,9 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-[System.Serializable]
-public class BossDeathEvent : UnityEvent<bool>
+
+public class BossDeathEvent : EventArgs
 {
     public bool IsBossDead { get; }
     public BossDeathEvent(bool isBossDead)
