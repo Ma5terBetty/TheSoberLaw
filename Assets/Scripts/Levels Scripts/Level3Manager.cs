@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Level3Manager : MonoBehaviour
+public class Level3Manager : MonoBehaviour, IObserver
 {
     #region Level3UI
     [SerializeField] GameObject gameplayUI;
@@ -47,11 +47,14 @@ public class Level3Manager : MonoBehaviour
         {
             ScriptableObj.Bosses[i].SetActive(false);
         }
+        //observer
+        GameManager.Instance.AddObserver(this);
+
     }
     void Update()
     {
         #region Level3UI
-        if (GameManager.Instance.isBossDefeated) winnerScreen.SetActive(true);
+        //if (GameManager.Instance.isBossDefeated) winnerScreen.SetActive(true);
         bossLife.fillAmount = 1 - bossDamage / 100f;
         if (GameManager.isGamePaused) gameplayUI.SetActive(false);
         else gameplayUI.SetActive(true);
@@ -159,5 +162,15 @@ public class Level3Manager : MonoBehaviour
         juegoPausado = false;
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    //Observer
+    void OnDestroy() 
+    {
+        GameManager.Instance.RemoveObserver(this);
+    }
+    public void Notify() 
+    {
+        winnerScreen.SetActive(true);
     }
 }

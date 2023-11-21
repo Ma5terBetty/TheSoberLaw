@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    
+
     public static GameManager Instance;
     [SerializeField] public GameObject player;
     [SerializeField] Scene currentScene;
     int currentLevel;
-    
+
     private bool isAlive;
     public bool dontDestroyOnLoad;
     public bool isLevel1Completed;
@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
     public bool isLevelStarted;
 
     Vector3 startPos;
+
+    //Observer
+    private List<IObserver> observers = new List<IObserver>();
+    int bossDamage  = 0;
+    int enemiesToDefeat = 0;
 
     private void Awake()
     {
@@ -106,7 +111,7 @@ public class GameManager : MonoBehaviour
     {
         Unpause();
         SceneManager.LoadScene(scene);
-        
+
     }
     /// <summary>
     /// Finds player's prefab on the current scene.
@@ -129,5 +134,45 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("OnDisable");
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    //Observer
+    public void AddObserver(IObserver observer) 
+    {
+        observers.Add(observer);
+    }
+    public void RemoveObserver(IObserver observer) 
+    {
+        observers.Remove(observer);
+    }
+    void NotifyObservers() 
+    {
+        foreach (var observer in observers) 
+        {
+            observer.Notify();
+        }
+    }
+
+    public int BossDamage 
+    {
+        get { return bossDamage; }
+        set 
+        { 
+            bossDamage = value;
+            if (bossDamage >= 100) NotifyObservers();
+        }
+    }
+    public int EnemiesToDefeat 
+    {
+        get { return enemiesToDefeat; }
+        set 
+        {
+            enemiesToDefeat = value;
+            if (enemiesToDefeat <= 0) 
+            {
+                isLevel1Completed = true;
+                NotifyObservers();
+            }
+        }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Level1Manager : MonoBehaviour
+public class Level1Manager : MonoBehaviour, IObserver
 {
     #region Level1UI
     [SerializeField] GameObject gameplayUI;
@@ -37,6 +37,8 @@ public class Level1Manager : MonoBehaviour
         enemyCounter = GameObject.FindGameObjectWithTag("Counter").GetComponent<Text>();
         enemyCounter.text = enemiesToDefeat.ToString();
         EventManager.OnKilledEnemy += EnemyKilled;
+
+        GameManager.Instance.AddObserver(this);
     }
 
     void Update()
@@ -67,7 +69,7 @@ public class Level1Manager : MonoBehaviour
         enemiesToDefeat--;
         if (enemyCounter == null) enemyCounter = GameObject.FindGameObjectWithTag("Counter").GetComponent<Text>();
         enemyCounter.text = enemiesToDefeat.ToString();
-        if (enemiesToDefeat == 0) GameManager.Instance.isLevel1Completed = true;
+        //if (enemiesToDefeat == 0) GameManager.Instance.isLevel1Completed = true;
     }
 
     private void OnDisable()
@@ -124,5 +126,15 @@ public class Level1Manager : MonoBehaviour
         juegoPausado = false;
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    //Observer
+    void OnDestroy( ) 
+    {
+        GameManager.Instance.RemoveObserver(this);
+    }
+    public void Notify() 
+    {
+        GameManager.Instance.isLevel1Completed = true;
     }
 }
