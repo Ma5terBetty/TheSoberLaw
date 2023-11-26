@@ -21,7 +21,7 @@ public class MainMenuManager : MonoBehaviour
     }
     public void ToggleCredits()
     {
-        credits.SetActive(!credits.activeSelf);
+        credits.SetActive(!credits.active);
     }
     public void LoadLevel1()
     {
@@ -37,6 +37,6 @@ public class MainMenuManager : MonoBehaviour
     }
     public void ToggleLevels()
     { 
-        levelsButtons.SetActive(!levelsButtons.activeSelf);
+        levelsButtons.SetActive(!levelsButtons.active);
     }
 }

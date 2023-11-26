@@ -17,7 +17,7 @@ public class Level2Manager : MonoBehaviour
     Transform[] spawnPoints;
     [SerializeField]
     InitialScreen initScreen;
-    public EnemiesOnLevelData ScriptableObj;
+    public Scriptableobject ScriptableObj;
     float enemyTimer;
     float timerChanger;
     float boxTimer;
@@ -51,7 +51,7 @@ public class Level2Manager : MonoBehaviour
     void Update()
     {
         #region Level2UI
-        if (!GameManager.IsGamePaused)
+        if (!GameManager.isGamePaused)
         {
             timer.text = Mathf.RoundToInt(counter).ToString();
             gameplayUI.SetActive(true);
@@ -67,7 +67,7 @@ public class Level2Manager : MonoBehaviour
             if (initScreen.GetComponent<CanvasGroup>().alpha == 1) GameManager.Instance.ChangeLevel(3);
         }
 
-        if (!GameManager.IsGamePaused && initScreen.canvasGroup.alpha <= 0)
+        if (!GameManager.isGamePaused && initScreen.canvasGroup.alpha <= 0)
         {
             enemyTimer += Time.deltaTime;
             boxTimer += Time.deltaTime;
@@ -124,7 +124,7 @@ public class Level2Manager : MonoBehaviour
 
     void RefreshHPBar()
     {
-        playerFill.fillAmount = player.HealthController.MaxLife / 100f;
+        playerFill.fillAmount = player.PlayerHealth / 100f;
     }
     #endregion
     public void Pausa()

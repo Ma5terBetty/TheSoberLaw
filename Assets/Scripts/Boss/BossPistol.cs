@@ -53,7 +53,7 @@ public class BossPistol : MonoBehaviour
     }
     void Update()
     {
-        if (!GameManager.IsGamePaused && GameManager.Instance.isLevelStarted && !GameManager.Instance.gameOver)
+        if (!GameManager.isGamePaused && GameManager.Instance.isLevelStarted && !GameManager.Instance.gameOver)
         {
             attackCooldown += Time.deltaTime;
 
@@ -116,7 +116,7 @@ public class BossPistol : MonoBehaviour
         if (attackCooldown >= 0.5f)
         {
             PrefabBullet enemyBullet = Instantiate(prefabBullet, noozle.position, transform.rotation);
-            //enemyBullet.IsFromPlayer = false;
+            enemyBullet.isFromPlayer = false;
             attackCooldown = 0;
             anim.SetBool("IsAttacking", true);
         }
@@ -190,7 +190,7 @@ public class BossPistol : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PrefabBullet>() != null)
         {
-            if (collision.gameObject.GetComponent<PrefabBullet>().IsFromPlayer)
+            if (collision.gameObject.GetComponent<PrefabBullet>().isFromPlayer)
             {
                 bossController.LifeUpdate(1);
                 sr.color = Color.red;

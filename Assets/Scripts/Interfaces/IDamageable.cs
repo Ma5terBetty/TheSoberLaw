@@ -3,5 +3,6 @@ using UnityEngine;
 public interface IDamageable
 {
     HealthController HealthController { get; }
-    void GetDamage(float damageAmount);
+    int CurrentLife { get; }
+    void GetDamage(float healAmount);
 }

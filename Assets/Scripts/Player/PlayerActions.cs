@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-//OBSOLETO
 public class PlayerActions : MonoBehaviour
 {
     SpriteRenderer _spriteRenderer;
@@ -45,7 +43,7 @@ public class PlayerActions : MonoBehaviour
         jumpCooldown -= Time.deltaTime;
         if (jumpCooldown < 0) jumpCooldown = 0;
 
-        if (!GameManager.IsGamePaused)
+        if (!GameManager.isGamePaused)
         {
             if (isControlsEnabled)
             {
@@ -72,13 +70,13 @@ public class PlayerActions : MonoBehaviour
             if (spriteMode)
             {
                 PrefabBullet playerBullet = Instantiate(bullet, transform.position + new Vector3(-0.5f, 0.25f, 0), new Quaternion(transform.rotation.x, transform.rotation.y + 180, transform.rotation.z, transform.position.magnitude));
-                //playerBullet.IsFromPlayer = true;
+                playerBullet.isFromPlayer = true;
                 shootDelay = 0;
             }
             else
             {
                 PrefabBullet playerBullet = Instantiate(bullet, transform.position + new Vector3(0.5f, 0.25f, 0), Quaternion.identity);
-                //playerBullet.IsFromPlayer = true;
+                playerBullet.isFromPlayer = true;
                 shootDelay = 0;
             }
         }
@@ -127,10 +125,10 @@ public class PlayerActions : MonoBehaviour
             _animator.SetBool("IsJumping", false);
         }
 
-        /*if (other.gameObject.CompareTag("eplat") && Input.GetKey(KeyCode.S))
+        if (other.gameObject.CompareTag("eplat") && Input.GetKey(KeyCode.S))
         {
             _boxCollider.isTrigger = true;
-        }*/
+        }
     }
     void OnTriggerExit2D(Collider2D other)
     {

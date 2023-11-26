@@ -23,23 +23,5 @@ public class HealthController
     {
         _currentLife = 0;
     }
-    public void GetDamage(float damageAmount)
-    {
-        _currentLife -= damageAmount;
-
-        if (_currentLife < 0 )
-        {
-            _currentLife = 0;
-        }
-    }
-    public void GetHealing(float healAmount)
-    {
-        _currentLife += healAmount;
-
-        if (_currentLife > MaxLife)
-        { 
-            _currentLife = MaxLife;
-        }
-    }
     #endregion
 }

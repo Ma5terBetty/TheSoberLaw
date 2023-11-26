@@ -7,7 +7,7 @@ public class HealthScript : MonoBehaviour
     BoxCollider2D bc;
     SpriteRenderer sr;
     Rigidbody2D rb;
-    AudioSource sound;
+    AudioSource audio;
 
     bool isDestroyed;
     float counter;
@@ -17,7 +17,7 @@ public class HealthScript : MonoBehaviour
         bc = GetComponent<BoxCollider2D>();
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        sound = GetComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -41,7 +41,7 @@ public class HealthScript : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Player>() != null)
         {
-            collision.gameObject.GetComponent<Player>().GetHealing(30);
+            collision.gameObject.GetComponent<Player>().RefreshHealth(30);
             DestroyHealth();
         }
     }
@@ -52,6 +52,6 @@ public class HealthScript : MonoBehaviour
         Destroy(bc);
         Destroy(sr);
         Destroy(rb);
-        sound.Play();
+        audio.Play();
     }
 }

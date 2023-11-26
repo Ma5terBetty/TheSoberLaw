@@ -1,80 +1,65 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Assertions;
 
 public class PrefabBullet : MonoBehaviour
 {
-    #region PRIVATE_PROPERTIES
-    private SpriteRenderer _spriteRenderer;
-    [SerializeField] private SpriteRenderer _outlineRenderer;
-    private BoxCollider2D _boxCollider;
-    private AudioSource sound; //A Sacar
-    private bool _isDestroyed;
-    private bool _isFromPlayer;
-    private float _speed;
-    private float _lifeSpawn;
-    private float _damageAmount;
-    #endregion
+    [SerializeField] private float speed;
+    SpriteRenderer sr;
+    BoxCollider2D bc;
+    AudioSource audio;
+    public bool isFromPlayer;
+    bool isDestroyed;
 
-    #region PUBLIC_PROPERTIES
-    public bool IsFromPlayer => _isFromPlayer;
-    public float DamageAmount => _damageAmount;
-    #endregion
+    float lifeSpawn;
 
     private void Awake()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _boxCollider = GetComponent<BoxCollider2D>();
-        sound = GetComponent<AudioSource>();
+        sr = this.gameObject.GetComponent<SpriteRenderer>();
+        bc = this.gameObject.GetComponent<BoxCollider2D>();
+        audio = GetComponent<AudioSource>();
     }
 
     void Start()
     {
         ColliderResize();
-        //_speed = 15f;
-        sound.Play();
-        _lifeSpawn = 0;
-        _isDestroyed = false;
+        speed = 15f;
+        audio.Play();
+        lifeSpawn = 0;
+        isDestroyed = false;
     }
 
     void Update()
     {
-        if (GameManager.IsGamePaused) return;
-
-        _lifeSpawn += Time.deltaTime;
-
-        if (!_spriteRenderer.isVisible || _isDestroyed)
+        if (!GameManager.isGamePaused)
         {
-            Destroy(_boxCollider);
-            _spriteRenderer.color = new Vector4(0, 0, 0, 0);
-            _outlineRenderer.color = new Vector4(0, 0, 0, 0);
+            lifeSpawn += Time.deltaTime;
 
-            if (_lifeSpawn >= 1.25f)
+            if (!sr.isVisible || isDestroyed)
             {
-                Destroy(this.gameObject);
+                Destroy(bc);
+                sr.color = new Vector4(0, 0, 0, 0);
+
+                if (lifeSpawn >= 1.25f)
+                {
+                    Destroy(this.gameObject);
+                }
             }
-        }
-        else
-        {
-            gameObject.transform.position += transform.right * _speed * Time.deltaTime;
+            gameObject.transform.position += transform.right * speed * Time.deltaTime;
         }
     }
 
     private void ColliderResize()
     {
-        Vector2 colliderSize = _spriteRenderer.bounds.size;
-        _boxCollider.size = colliderSize;
+        Vector2 colliderSize = sr.bounds.size;
+        bc.size = colliderSize;
     }
 
     public void DestroyBullet()
     {
-        _isDestroyed = true;
-    }
-
-    public void SetBullet(bool isFromPlayer, float damageAmount, float speed)
-    { 
-        _isFromPlayer = isFromPlayer;
-        _damageAmount = damageAmount;
-        _speed = speed;
-        _boxCollider.enabled = true;
+        isDestroyed = true;
     }
 }
 

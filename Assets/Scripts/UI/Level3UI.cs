@@ -35,7 +35,7 @@ public class Level3UI : MonoBehaviour
 
         bossLife.fillAmount = 1 - lvlManager.bossDamage / 100f;
 
-        if (GameManager.IsGamePaused)
+        if (GameManager.isGamePaused)
         {
             gameplayUI.SetActive(false);
             pauseUI.SetActive(true);
@@ -72,6 +72,6 @@ public class Level3UI : MonoBehaviour
     }
     void RefreshHPBar()
     {
-        playerFill.fillAmount = player.HealthController.MaxLife / 100f;
+        playerFill.fillAmount = player.PlayerHealth / 100f;
     }
 }
