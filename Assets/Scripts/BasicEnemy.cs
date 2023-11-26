@@ -26,7 +26,7 @@ public class BasicEnemy : MonoBehaviour
     bool isInRange;
     bool isOnAir;
 
-    int currentLife;
+    float currentLife;
 
     float attackCooldown;
     float playerDistance = 7;
@@ -82,7 +82,7 @@ public class BasicEnemy : MonoBehaviour
     }
     void Update()
     {
-        if (!GameManager.isGamePaused)
+        if (!GameManager.IsGamePaused)
         {
             if (currentLife <= 0)
             {
@@ -202,7 +202,7 @@ public class BasicEnemy : MonoBehaviour
             if (burstDelay >= 0.1f)
             {
                 PrefabBullet enemyBullet = Instantiate(bulletPrefab, castingTransform.position, transform.rotation);
-                enemyBullet.isFromPlayer = false;
+              //  enemyBullet.IsFromPlayer = false;
                 enemyBullet.transform.Rotate(new Vector3(0, 0, Random.Range(-30, 30)));
                 burstDelay = 0;
             }
@@ -220,7 +220,7 @@ public class BasicEnemy : MonoBehaviour
         if (attackCooldown >= 0.5f)
         {
             PrefabBullet enemyBullet = Instantiate(bulletPrefab, castingTransform.position, transform.rotation);
-            enemyBullet.isFromPlayer = false;
+            //enemyBullet.IsFromPlayer = false;
             attackCooldown = 0;
         }
     }
@@ -231,7 +231,7 @@ public class BasicEnemy : MonoBehaviour
             for (int i = 0; i < 3; i++)
             {
                 PrefabBullet enemyBullet = Instantiate(bulletPrefab, castingTransform.position, transform.rotation);
-                enemyBullet.isFromPlayer = false;
+                //enemyBullet.IsFromPlayer = false;
                 enemyBullet.transform.Rotate(new Vector3(0, 0, -30));
                 enemyBullet.transform.Rotate(new Vector3(0, 0, 30 * i));
                 attackCooldown = 0;
@@ -270,7 +270,7 @@ public class BasicEnemy : MonoBehaviour
     }
     void DropHealing() // Otorga vida en caso de detectar que el jugador tiene poca vida.
     {
-        if (player.GetComponent<Player>().playerHp <= 30)
+        if (player.GetComponent<Player>().HealthController.CurrentLife <= 30)
         {
             Instantiate(healingBox, transform.position, transform.rotation);
         }
@@ -300,11 +300,12 @@ public class BasicEnemy : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<PrefabBullet>() != null)
+        var bullet = collision.gameObject.GetComponent<PrefabBullet>();
+        if (bullet != null)
         {
-            if (collision.gameObject.GetComponent<PrefabBullet>().isFromPlayer)
+            if (bullet.IsFromPlayer)
             {
-                currentLife -= 25;
+                currentLife -= bullet.DamageAmount;
                 sr.color = Color.red;
 
                 collision.gameObject.GetComponent<PrefabBullet>().DestroyBullet();
@@ -316,7 +317,6 @@ public class BasicEnemy : MonoBehaviour
             }
         }
     }
-
     private void OnCollisionStay2D(Collision2D collision)
     {
         isOnAir = false;
