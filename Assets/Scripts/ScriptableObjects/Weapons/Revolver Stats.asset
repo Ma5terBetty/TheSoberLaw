@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Revolver Stats
   m_EditorClassIdentifier: 
   _stats:
-    Damage: 3
+    Damage: 7
     AmmoSpeed: 12
     FireCooldown: 1.5
     FireRate: 0.2

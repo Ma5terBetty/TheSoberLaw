@@ -25,7 +25,7 @@ public class Pistol : BaseWeapon
         }
     }
 
-    private bool IsShootAvailable()
+    public bool IsShootAvailable()
     { 
         return shootingCooldown >= Stats.FireCooldown;
     }

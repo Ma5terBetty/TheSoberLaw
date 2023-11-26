@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Submachine Stats
   m_EditorClassIdentifier: 
   _stats:
-    Damage: 3
+    Damage: 18.75
     AmmoSpeed: 20
     FireCooldown: 0.8
     FireRate: 0.125

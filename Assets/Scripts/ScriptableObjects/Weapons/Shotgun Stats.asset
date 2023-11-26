@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shotgun Stats
   m_EditorClassIdentifier: 
   _stats:
-    Damage: 7.5
+    Damage: 25
     AmmoSpeed: 12
     FireCooldown: 0.8
     FireRate: 0
