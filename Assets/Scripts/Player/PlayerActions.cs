@@ -45,7 +45,7 @@ public class PlayerActions : MonoBehaviour
         jumpCooldown -= Time.deltaTime;
         if (jumpCooldown < 0) jumpCooldown = 0;
 
-        if (!GameManager.isGamePaused)
+        if (!GameManager.IsGamePaused)
         {
             if (isControlsEnabled)
             {

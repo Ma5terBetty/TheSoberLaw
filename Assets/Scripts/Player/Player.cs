@@ -14,6 +14,7 @@ public class Player : BaseCharacter, IDamageable, IHealeable, IShooter
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider;
     private Rigidbody2D _rigidBody;
+    private WeaponChanger _weaponChanger;
     #endregion
 
     #region UNITY_FUNCTIONS
@@ -22,6 +23,7 @@ public class Player : BaseCharacter, IDamageable, IHealeable, IShooter
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _rigidBody = GetComponent<Rigidbody2D>();
+        _weaponChanger = GetComponent<WeaponChanger>();
         _isPlayer = GetComponent<Player>() == null ? false : true;
     }
 
@@ -40,11 +42,15 @@ public class Player : BaseCharacter, IDamageable, IHealeable, IShooter
 
     void Update()
     {
+        if (GameManager.IsGamePaused) return;
+
         if (HealthController.CurrentLife <= 0)
         {
             EventManager.Instance.PlayerDefeated();
             GameManager.Instance.gameOver = true;
         }
+
+        WeapongChange();
 
         if (_spriteRenderer.color != Color.white)
         {
@@ -94,7 +100,7 @@ public class Player : BaseCharacter, IDamageable, IHealeable, IShooter
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-       if (other.gameObject.GetComponent<PrefabBullet>() != null)
+        if (other.gameObject.GetComponent<PrefabBullet>() != null)
         {
             if (!other.gameObject.GetComponent<PrefabBullet>().IsFromPlayer)
             {
@@ -103,7 +109,7 @@ public class Player : BaseCharacter, IDamageable, IHealeable, IShooter
                 EventManager.Instance.HpChanged();
                 other.gameObject.GetComponent<PrefabBullet>().DestroyBullet();
             }
-       }
+        }
     }
 
     public void GetDamage(float damageAmount)
@@ -116,14 +122,45 @@ public class Player : BaseCharacter, IDamageable, IHealeable, IShooter
         HealthController.GetHealing(healAmount);
     }
 
-    private void PickupWeapon()
-    { 
-        
+    private void WeapongChange()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            GetNewWeapon(0);
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            GetNewWeapon(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            GetNewWeapon(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            GetNewWeapon(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            GetNewWeapon(4);
+        }
+        print("Weapon Changed");
+    }
+
+    void GetNewWeapon(int weaponKey)
+    {
+        Vector3 weaponPos = _currentWeapon.transform.position;
+        Destroy(_currentWeapon.gameObject);
+        GameObject newWeapon = Instantiate(_weaponChanger.RequestWeapon(weaponKey), _currentWeapon.transform.position, this.transform.rotation);
+        _currentWeapon = newWeapon.GetComponent<BaseWeapon>();
+        newWeapon.transform.position = weaponPos;
+        newWeapon.transform.parent = this.transform;
     }
 
     public void Shoot()
     {
         _currentWeapon.Shoot(true);
+        print("Shooting");
     }
     #endregion
 }
