@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,7 +49,7 @@ public class Level3Manager : MonoBehaviour
         #region Level3UI
         if (GameManager.Instance.isBossDefeated) winnerScreen.SetActive(true);
         bossLife.fillAmount = 1 - bossDamage / 100f;
-        if (GameManager.isGamePaused)
+        if (GameManager.IsGamePaused)
         {
             gameplayUI.SetActive(false);
             pauseUI.SetActive(true);

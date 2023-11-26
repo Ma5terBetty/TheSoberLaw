@@ -32,7 +32,7 @@ public class Level1UI : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.isGamePaused)
+        if (GameManager.IsGamePaused)
         {
             gameplayUI.SetActive(false);
             pauseUI.SetActive(true);

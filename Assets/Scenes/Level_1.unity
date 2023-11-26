@@ -537,6 +537,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7599853215015989901, guid: 2850a3a324c41e04d922ee6f8d1f7378,
         type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599853215015989901, guid: 2850a3a324c41e04d922ee6f8d1f7378,
+        type: 3}
       propertyPath: m_TagString
       value: eplat
       objectReference: {fileID: 0}
@@ -1480,6 +1485,11 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2386825191160113649, guid: bc5d03d186ba77e4daf94d452f683a37,
+        type: 3}
+      propertyPath: _patrolDistance
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4423332005665988679, guid: bc5d03d186ba77e4daf94d452f683a37,
         type: 3}
       propertyPath: m_Name
@@ -1699,6 +1709,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2001077702111354225, guid: 7dab910d82f091d4ab800bc26825682e,
+        type: 3}
+      propertyPath: _patrolDistance
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5472183795107486767, guid: 7dab910d82f091d4ab800bc26825682e,
         type: 3}
@@ -1941,6 +1956,11 @@ PrefabInstance:
       propertyPath: isPatrolling
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5210913418257003988, guid: d3eebe98c9bd6d64a83cf52931b24d15,
+        type: 3}
+      propertyPath: _patrolDistance
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6068385172585556570, guid: d3eebe98c9bd6d64a83cf52931b24d15,
         type: 3}
       propertyPath: m_Name
@@ -2039,7 +2059,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.008232, y: 0.057811737, z: -10}
+  m_LocalPosition: {x: -2.0152779, y: 0.057801247, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2790,6 +2810,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
         type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
+        type: 3}
       propertyPath: m_TagString
       value: eplat
       objectReference: {fileID: 0}
@@ -3370,6 +3395,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8033932728672449035, guid: 91c77c247e66ebd4b94e236966576c71,
         type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033932728672449035, guid: 91c77c247e66ebd4b94e236966576c71,
+        type: 3}
       propertyPath: m_TagString
       value: eplat
       objectReference: {fileID: 0}
@@ -3745,6 +3775,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7599853215015989901, guid: 2850a3a324c41e04d922ee6f8d1f7378,
         type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599853215015989901, guid: 2850a3a324c41e04d922ee6f8d1f7378,
+        type: 3}
       propertyPath: m_TagString
       value: eplat
       objectReference: {fileID: 0}
@@ -3841,6 +3876,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Roof Dark (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033932728672449035, guid: 91c77c247e66ebd4b94e236966576c71,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8033932728672449035, guid: 91c77c247e66ebd4b94e236966576c71,
         type: 3}
@@ -3955,6 +3995,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Railing (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
         type: 3}
@@ -4484,6 +4529,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Railing (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
         type: 3}
@@ -5576,6 +5626,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8033932728672449035, guid: 91c77c247e66ebd4b94e236966576c71,
         type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033932728672449035, guid: 91c77c247e66ebd4b94e236966576c71,
+        type: 3}
       propertyPath: m_TagString
       value: eplat
       objectReference: {fileID: 0}
@@ -5681,6 +5736,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9249a1804985d31428c10faf2554a07f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1149996690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149996687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d798be71cd6d74a9b9f5b19d286a35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weapons: []
 --- !u!1 &1173258307
 GameObject:
   m_ObjectHideFlags: 0
@@ -5853,6 +5921,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1628516340}
     m_Modifications:
+    - target: {fileID: 2386825191160113649, guid: bc5d03d186ba77e4daf94d452f683a37,
+        type: 3}
+      propertyPath: _patrolDistance
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4423332005665988679, guid: bc5d03d186ba77e4daf94d452f683a37,
         type: 3}
       propertyPath: m_Name
@@ -5943,6 +6016,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Railing (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
         type: 3}
@@ -6933,6 +7011,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7599853215015989901, guid: 2850a3a324c41e04d922ee6f8d1f7378,
         type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599853215015989901, guid: 2850a3a324c41e04d922ee6f8d1f7378,
+        type: 3}
       propertyPath: m_TagString
       value: eplat
       objectReference: {fileID: 0}
@@ -7131,6 +7214,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Railing (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
         type: 3}
@@ -7576,6 +7664,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2001077702111354225, guid: 7dab910d82f091d4ab800bc26825682e,
+        type: 3}
+      propertyPath: _patrolDistance
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5472183795107486767, guid: 7dab910d82f091d4ab800bc26825682e,
         type: 3}
@@ -8176,6 +8269,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7599853215015989901, guid: 2850a3a324c41e04d922ee6f8d1f7378,
         type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599853215015989901, guid: 2850a3a324c41e04d922ee6f8d1f7378,
+        type: 3}
       propertyPath: m_TagString
       value: eplat
       objectReference: {fileID: 0}
@@ -8272,6 +8370,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1628516340}
     m_Modifications:
+    - target: {fileID: 2386825191160113649, guid: bc5d03d186ba77e4daf94d452f683a37,
+        type: 3}
+      propertyPath: _patrolDistance
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4423332005665988679, guid: bc5d03d186ba77e4daf94d452f683a37,
         type: 3}
       propertyPath: m_Name
@@ -8777,6 +8880,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1628516340}
     m_Modifications:
+    - target: {fileID: 2386825191160113649, guid: bc5d03d186ba77e4daf94d452f683a37,
+        type: 3}
+      propertyPath: _patrolDistance
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4423332005665988679, guid: bc5d03d186ba77e4daf94d452f683a37,
         type: 3}
       propertyPath: m_Name
@@ -9369,6 +9477,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2001077702111354225, guid: 7dab910d82f091d4ab800bc26825682e,
+        type: 3}
+      propertyPath: _patrolDistance
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5472183795107486767, guid: 7dab910d82f091d4ab800bc26825682e,
         type: 3}
       propertyPath: m_Name
@@ -9604,6 +9717,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Railing (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
         type: 3}
@@ -10235,6 +10353,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
         type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
+        type: 3}
       propertyPath: m_TagString
       value: eplat
       objectReference: {fileID: 0}
@@ -10481,6 +10604,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isPatrolling
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5210913418257003988, guid: d3eebe98c9bd6d64a83cf52931b24d15,
+        type: 3}
+      propertyPath: _patrolDistance
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6068385172585556570, guid: d3eebe98c9bd6d64a83cf52931b24d15,
         type: 3}
@@ -11358,6 +11486,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
         type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
+        type: 3}
       propertyPath: m_TagString
       value: eplat
       objectReference: {fileID: 0}
@@ -11479,6 +11612,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Railing (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6524769427393522265, guid: 932b176992ee28348baeeb1f68f6a919,
         type: 3}

@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public bool isLevel1Completed;
     public bool isLevel2Completed;
     public bool isBossDefeated;
-    public static bool isGamePaused;
+    public static bool IsGamePaused;
     public bool gameOver;
 
     public bool isLevelStarted;
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameManager.isGamePaused)
+            if (GameManager.IsGamePaused)
             {
                 Unpause();
             }
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = 0;
-        isGamePaused = true;
+        IsGamePaused = true;
     }
     /// <summary>
     /// Unpauses the game by setting the Time.timeScale from 0f to 1f.
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
     void Unpause()
     {
         Time.timeScale = 1.0f;
-        isGamePaused = false;
+        IsGamePaused = false;
     }
     public void LoadMainMenu()
     {

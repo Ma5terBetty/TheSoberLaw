@@ -4,6 +4,7 @@ public class PrefabBullet : MonoBehaviour
 {
     #region PRIVATE_PROPERTIES
     private SpriteRenderer _spriteRenderer;
+    [SerializeField] private SpriteRenderer _outlineRenderer;
     private BoxCollider2D _boxCollider;
     private AudioSource sound; //A Sacar
     private bool _isDestroyed;
@@ -36,20 +37,23 @@ public class PrefabBullet : MonoBehaviour
 
     void Update()
     {
-        if (!GameManager.isGamePaused)
+        if (GameManager.IsGamePaused) return;
+
+        _lifeSpawn += Time.deltaTime;
+
+        if (!_spriteRenderer.isVisible || _isDestroyed)
         {
-            _lifeSpawn += Time.deltaTime;
+            Destroy(_boxCollider);
+            _spriteRenderer.color = new Vector4(0, 0, 0, 0);
+            _outlineRenderer.color = new Vector4(0, 0, 0, 0);
 
-            if (!_spriteRenderer.isVisible || _isDestroyed)
+            if (_lifeSpawn >= 1.25f)
             {
-                Destroy(_boxCollider);
-                _spriteRenderer.color = new Vector4(0, 0, 0, 0);
-
-                if (_lifeSpawn >= 1.25f)
-                {
-                    Destroy(this.gameObject);
-                }
+                Destroy(this.gameObject);
             }
+        }
+        else
+        {
             gameObject.transform.position += transform.right * _speed * Time.deltaTime;
         }
     }

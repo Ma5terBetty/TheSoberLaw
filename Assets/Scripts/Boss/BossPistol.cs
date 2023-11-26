@@ -53,7 +53,7 @@ public class BossPistol : MonoBehaviour
     }
     void Update()
     {
-        if (!GameManager.isGamePaused && GameManager.Instance.isLevelStarted && !GameManager.Instance.gameOver)
+        if (!GameManager.IsGamePaused && GameManager.Instance.isLevelStarted && !GameManager.Instance.gameOver)
         {
             attackCooldown += Time.deltaTime;
 

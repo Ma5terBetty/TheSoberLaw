@@ -48,7 +48,7 @@ public class Level2Manager : MonoBehaviour
     void Update()
     {
         #region Level2UI
-        if (!GameManager.isGamePaused)
+        if (!GameManager.IsGamePaused)
         {
             timer.text = Mathf.RoundToInt(counter).ToString();
             gameplayUI.SetActive(true);
@@ -66,7 +66,7 @@ public class Level2Manager : MonoBehaviour
             if (initScreen.GetComponent<CanvasGroup>().alpha == 1) GameManager.Instance.ChangeLevel(3);
         }
 
-        if (!GameManager.isGamePaused && initScreen.canvasGroup.alpha <= 0)
+        if (!GameManager.IsGamePaused && initScreen.canvasGroup.alpha <= 0)
         {
             enemyTimer += Time.deltaTime;
             boxTimer += Time.deltaTime;

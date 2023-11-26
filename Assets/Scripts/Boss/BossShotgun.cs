@@ -49,7 +49,7 @@ public class BossShotgun : MonoBehaviour
 
     void Update()
     {
-        if (!GameManager.isGamePaused && !GameManager.Instance.gameOver)
+        if (!GameManager.IsGamePaused && !GameManager.Instance.gameOver)
         {
             _attackCooldown += Time.deltaTime;
 

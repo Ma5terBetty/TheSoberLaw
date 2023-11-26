@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Level1Manager : MonoBehaviour
@@ -18,6 +16,13 @@ public class Level1Manager : MonoBehaviour
     GameObject[] enemiesOnStage;
     [SerializeField] Player player;
     public Text enemyCounter;
+
+    #region UNITY_FUNCTIONS
+    private void OnEnable()
+    {
+        EventManager.OnKilledEnemy += EnemyKilled;
+    }
+
     void Start()
     {
         #region Level1UI
@@ -28,18 +33,18 @@ public class Level1Manager : MonoBehaviour
         EventManager.OnPlayerDefeat += DefeatScreen;
         EventManager.OnHpVariation += RefreshHPBar;
         #endregion
+
         GameManager.Instance.isLevel1Completed = false;
         enemiesOnStage = GameObject.FindGameObjectsWithTag("Enemy");
-        GetEnemiesAmount();
         enemyCounter = GameObject.FindGameObjectWithTag("Counter").GetComponent<Text>();
         enemyCounter.text = enemiesToDefeat.ToString();
-        EventManager.OnKilledEnemy += EnemyKilled;
+        GetEnemiesAmount();
     }
 
     void Update()
     {
         #region Level1UI
-        if (GameManager.isGamePaused)
+        if (GameManager.IsGamePaused)
         {
             gameplayUI.SetActive(false);
             pauseUI.SetActive(true);
@@ -59,6 +64,12 @@ public class Level1Manager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Y)) GameManager.Instance.isLevel1Completed = true;
     }
+    private void OnDisable()
+    {
+        EventManager.OnKilledEnemy -= EnemyKilled;
+    }
+
+    #endregion
 
     void GetEnemiesAmount()
     {
@@ -78,15 +89,7 @@ public class Level1Manager : MonoBehaviour
         if (enemiesToDefeat == 0) GameManager.Instance.isLevel1Completed = true;
     }
 
-    private void OnDisable()
-    {
-        UnSuscribe();
-    }
-
-    void UnSuscribe()
-    {
-        EventManager.OnKilledEnemy -= EnemyKilled;
-    }
+    
     #region Level1UI
     void PauseMenu()
     {

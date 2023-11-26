@@ -35,7 +35,7 @@ public class Level3UI : MonoBehaviour
 
         bossLife.fillAmount = 1 - lvlManager.bossDamage / 100f;
 
-        if (GameManager.isGamePaused)
+        if (GameManager.IsGamePaused)
         {
             gameplayUI.SetActive(false);
             pauseUI.SetActive(true);

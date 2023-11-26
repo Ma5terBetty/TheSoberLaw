@@ -30,7 +30,7 @@ public class Level2UI : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.isGamePaused)
+        if (!GameManager.IsGamePaused)
         {
             timer.text = Mathf.RoundToInt(lvlManager.counter).ToString();
             gameplayUI.SetActive(true);

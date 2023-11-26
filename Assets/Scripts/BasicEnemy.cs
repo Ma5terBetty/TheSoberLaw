@@ -82,7 +82,7 @@ public class BasicEnemy : MonoBehaviour
     }
     void Update()
     {
-        if (!GameManager.isGamePaused)
+        if (!GameManager.IsGamePaused)
         {
             if (currentLife <= 0)
             {
@@ -317,7 +317,6 @@ public class BasicEnemy : MonoBehaviour
             }
         }
     }
-
     private void OnCollisionStay2D(Collision2D collision)
     {
         isOnAir = false;
