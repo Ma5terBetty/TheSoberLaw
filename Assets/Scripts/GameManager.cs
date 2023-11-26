@@ -5,28 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
+    
     public static GameManager Instance;
     [SerializeField] public GameObject player;
     [SerializeField] Scene currentScene;
     int currentLevel;
-
+    
     private bool isAlive;
     public bool dontDestroyOnLoad;
     public bool isLevel1Completed;
     public bool isLevel2Completed;
     public bool isBossDefeated;
-    public static bool isGamePaused;
+    public static bool IsGamePaused;
     public bool gameOver;
 
     public bool isLevelStarted;
 
     Vector3 startPos;
-
-    //Observer
-    private List<IObserver> observers = new List<IObserver>();
-    int bossDamage  = 0;
-    int enemiesToDefeat = 0;
 
     private void Awake()
     {
@@ -44,7 +39,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        FindPlayer();
+        player = GameObject.FindGameObjectWithTag("Player");
         startPos = GameObject.FindGameObjectWithTag("StartPos").GetComponent<Transform>().position;
 
         currentScene = SceneManager.GetActiveScene();
@@ -57,7 +52,6 @@ public class GameManager : MonoBehaviour
     }
     void OnEnable()
     {
-        Debug.Log("OnEnable called");
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     private void Start()
@@ -71,7 +65,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameManager.isGamePaused)
+            if (GameManager.IsGamePaused)
             {
                 Unpause();
             }
@@ -87,7 +81,7 @@ public class GameManager : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = 0;
-        isGamePaused = true;
+        IsGamePaused = true;
     }
     /// <summary>
     /// Unpauses the game by setting the Time.timeScale from 0f to 1f.
@@ -95,7 +89,7 @@ public class GameManager : MonoBehaviour
     void Unpause()
     {
         Time.timeScale = 1.0f;
-        isGamePaused = false;
+        IsGamePaused = false;
     }
     public void LoadMainMenu()
     {
@@ -111,7 +105,6 @@ public class GameManager : MonoBehaviour
     {
         Unpause();
         SceneManager.LoadScene(scene);
-
     }
     /// <summary>
     /// Finds player's prefab on the current scene.
@@ -126,53 +119,10 @@ public class GameManager : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("OnSceneLoaded: " + scene.name);
-        Debug.Log(mode);
-        FindPlayer();
+        
     }
     void OnDisable()
     {
-        Debug.Log("OnDisable");
         SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    //Observer
-    public void AddObserver(IObserver observer) 
-    {
-        observers.Add(observer);
-    }
-    public void RemoveObserver(IObserver observer) 
-    {
-        observers.Remove(observer);
-    }
-    void NotifyObservers() 
-    {
-        foreach (var observer in observers) 
-        {
-            observer.Notify();
-        }
-    }
-
-    public int BossDamage 
-    {
-        get { return bossDamage; }
-        set 
-        { 
-            bossDamage = value;
-            if (bossDamage >= 100) NotifyObservers();
-        }
-    }
-    public int EnemiesToDefeat 
-    {
-        get { return enemiesToDefeat; }
-        set 
-        {
-            enemiesToDefeat = value;
-            if (enemiesToDefeat <= 0) 
-            {
-                isLevel1Completed = true;
-                NotifyObservers();
-            }
-        }
     }
 }

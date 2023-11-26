@@ -9,7 +9,7 @@ public class WhiskyCollision : MonoBehaviour
         if (collision.gameObject.GetComponent<Player>() != null)
         {
             collision.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-            collision.gameObject.GetComponent<Player>().RefreshHealth(-30);
+            collision.gameObject.GetComponent<Player>().GetDamage(30);
             Destroy(transform.parent.gameObject);
         }
     }

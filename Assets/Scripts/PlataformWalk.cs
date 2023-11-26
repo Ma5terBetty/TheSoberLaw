@@ -31,8 +31,12 @@ public class PlataformWalk : MonoBehaviour
     }
 
     void OnDrawGizmos()
-    { 
+    {
+        Vector3 source = transform.right;
+
+        Vector3 rotatedVector = Quaternion.AngleAxis(-40, Vector3.forward) * source;
+
         Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(groundPivot.position, Vector2.down);
+        Gizmos.DrawRay(transform.position, rotatedVector * rayDist);
     }
 }
