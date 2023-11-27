@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour, IMoveable
     private float _movementSpeed;
     private float _currentJumpCooldown;
     private bool _isJumping;
+
+    [SerializeField] private LayerMask _floorLayerMask;
     #endregion
 
     #region UNITY_FUNCTIONS
@@ -45,9 +47,12 @@ public class PlayerMovement : MonoBehaviour, IMoveable
         if (_currentJumpCooldown > 0)
         {
             _currentJumpCooldown -= Time.deltaTime;
+            _isJumping = false;
         }
 
         Jump();
+
+        print($"{_isJumping}");
     }
     private void FixedUpdate()
     {
@@ -55,21 +60,9 @@ public class PlayerMovement : MonoBehaviour, IMoveable
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == _groundLayer || collision.gameObject.layer == _platformLayer || collision.otherCollider.CompareTag(_platformsTag))
-        {
-            _isJumping = false;
-        }
-
         if (collision.gameObject.CompareTag(_platformsTag) && Input.GetKey(KeyCode.S))
         {
             _boxCollider.isTrigger = true;
-        }
-    }
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.layer == _groundLayer || other.gameObject.layer == _platformLayer)
-        {
-            _isJumping = false;
         }
     }
     private void OnTriggerExit2D(Collider2D other)

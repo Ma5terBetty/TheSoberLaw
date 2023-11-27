@@ -224,6 +224,9 @@ MonoBehaviour:
   _platformsTag: eplat
   _jumpForce: 8
   _jumpCooldown: 0.75
+  _floorLayerMask:
+    serializedVersion: 2
+    m_Bits: 65793
 --- !u!114 &-8823466380483352335
 MonoBehaviour:
   m_ObjectHideFlags: 0
