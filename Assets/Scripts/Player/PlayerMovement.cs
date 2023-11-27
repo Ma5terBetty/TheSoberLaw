@@ -51,8 +51,6 @@ public class PlayerMovement : MonoBehaviour, IMoveable
         }
 
         Jump();
-
-        print($"{_isJumping}");
     }
     private void FixedUpdate()
     {
@@ -84,7 +82,6 @@ public class PlayerMovement : MonoBehaviour, IMoveable
             _currentJumpCooldown = _jumpCooldown;
         }
     }
-
     public void Move()
     {
         _rigidBody.velocity = new Vector2(Input.GetAxis("Horizontal") * MovementSpeed, Rigidbody.velocity.y);

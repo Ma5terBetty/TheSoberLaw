@@ -13,6 +13,7 @@ public class Enemy : BaseCharacter, IDamageable, IShooter
     [SerializeField] private LayerMask _bordersLayerMask;
     [SerializeField] private LayerMask _scenarioLayerMask;
     [SerializeField] private LayerMask _playerLayerMask;
+    [SerializeField] private GameObject _health;
     private bool _isAttacking;
     private bool _isGrounded;
     private bool _isMoving;
@@ -62,6 +63,7 @@ public class Enemy : BaseCharacter, IDamageable, IShooter
     private void FixedUpdate()
     {
         if (GameManager.IsGamePaused) return;
+        if (!IsGrounded) return;
 
         if (_isMoving)
         {
@@ -70,7 +72,8 @@ public class Enemy : BaseCharacter, IDamageable, IShooter
     }
     private void LateUpdate()
     {
-        CheckBorders();
+        if (GameManager.IsGamePaused) return;
+        if (!IsGrounded) return;
 
         if (_isPatrolling)
         {
@@ -81,11 +84,13 @@ public class Enemy : BaseCharacter, IDamageable, IShooter
                 transform.position = transform.position - aux;
             }
         }
+
+        CheckBorders();
     }
     #endregion
 
     #region COLLISION_AND_TRIGGERS
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.layer == _scenarioLayerMask) _isGrounded = true;
         else _isGrounded = true;
@@ -115,6 +120,15 @@ public class Enemy : BaseCharacter, IDamageable, IShooter
     public void GetDamage(float damageAmount)
     {
         _healthController.GetDamage(damageAmount);
+        if (_healthController.CurrentLife <= 0)
+        {
+            var playerHC = GameManager.Instance.player.GetComponent<HealthController>();
+            if (playerHC.CurrentLife <= playerHC.MaxLife / 4)
+            {
+                Instantiate(_health, transform.position, Quaternion.identity);
+            }
+            Destroy(this.gameObject);
+        }
     }
     private void CheckBorders()
     {

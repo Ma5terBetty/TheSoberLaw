@@ -26,7 +26,6 @@ public class Player : BaseCharacter, IDamageable, IHealeable, IShooter
         _weaponChanger = GetComponent<WeaponChanger>();
         _isPlayer = GetComponent<Player>() == null ? false : true;
     }
-
     private void Start()
     {
         _healthController.Initialize(MaxLife);
@@ -39,7 +38,6 @@ public class Player : BaseCharacter, IDamageable, IHealeable, IShooter
 
         GameManager.Instance.gameOver = false;
     }
-
     void Update()
     {
         if (GameManager.IsGamePaused) return;
@@ -62,7 +60,6 @@ public class Player : BaseCharacter, IDamageable, IHealeable, IShooter
             Shoot();
         }
     }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.layer == 11)
@@ -87,17 +84,6 @@ public class Player : BaseCharacter, IDamageable, IHealeable, IShooter
             Destroy(other.gameObject);
         }
     }
-    #endregion
-
-    #region CUSTOM_FUNCTIONS
-    /// <summary>
-    /// Rezises the collider with the sprite dimensions
-    /// </summary>
-    private void ColliderResize()
-    {
-        Vector2 colliderSize = _spriteRenderer.bounds.size;
-        _boxCollider.size = colliderSize;
-    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<PrefabBullet>() != null)
@@ -111,17 +97,25 @@ public class Player : BaseCharacter, IDamageable, IHealeable, IShooter
             }
         }
     }
+    #endregion
 
+    #region CUSTOM_FUNCTIONS
+    /// <summary>
+    /// Rezises the collider with the sprite dimensions
+    /// </summary>
+    private void ColliderResize()
+    {
+        Vector2 colliderSize = _spriteRenderer.bounds.size;
+        _boxCollider.size = colliderSize;
+    }
     public void GetDamage(float damageAmount)
     {
         HealthController.GetDamage(damageAmount);
     }
-
     public void GetHealing(float healAmount)
     {
         HealthController.GetHealing(healAmount);
     }
-
     private void WeapongChange()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -144,7 +138,6 @@ public class Player : BaseCharacter, IDamageable, IHealeable, IShooter
         {
             GetNewWeapon(4);
         }
-        print("Weapon Changed");
     }
 
     void GetNewWeapon(int weaponKey)
@@ -160,7 +153,6 @@ public class Player : BaseCharacter, IDamageable, IHealeable, IShooter
     public void Shoot()
     {
         _currentWeapon.Shoot(true);
-        print("Shooting");
     }
     #endregion
 }

@@ -1,5 +1,3 @@
-using UnityEditor;
-using UnityEditor.TerrainTools;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WeaponStats", menuName ="Stats/Weapon", order =1)]

@@ -12,6 +12,7 @@ TagManager:
   - Counter
   - DefeatScreen
   - eplat
+  - Boss
   layers:
   - Default
   - TransparentFX

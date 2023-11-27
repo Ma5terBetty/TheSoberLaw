@@ -24,5 +24,4 @@ public class WhiskeyScript : MonoBehaviour
     {
         transform.Rotate(new Vector3(0, 0, 180 * Time.deltaTime));
     }
-   
 }
