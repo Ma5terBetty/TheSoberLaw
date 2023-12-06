@@ -48,7 +48,7 @@ public class BoxScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 8)
+        if (collision.gameObject.layer == 16)
         {
             isGrounded = true;
             Destroy(_rigidBody);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossPistol : MonoBehaviour
+public class BossPistol : BaseCharacter
 {
     Animator anim;
     BoxCollider2D bc;
