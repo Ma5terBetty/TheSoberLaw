@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class Level2Manager : MonoBehaviour
 {
     #region Level2UI
+    [SerializeField] GameObject pauseUI;
     [SerializeField] GameObject gameplayUI;
     [SerializeField] GameObject defeatScreen;
     [SerializeField] Text timer;
@@ -17,15 +17,11 @@ public class Level2Manager : MonoBehaviour
     Transform[] spawnPoints;
     [SerializeField]
     InitialScreen initScreen;
-    public Scriptableobject ScriptableObj;
+    public EnemiesOnLevelData ScriptableObj;
     float enemyTimer;
     float timerChanger;
     float boxTimer;
     public float counter;
-    //Menu de pausa
-    [SerializeField] private GameObject botonPausa;
-    [SerializeField] private GameObject menuPausa;
-    private bool juegoPausado = false;
 
     private void Awake()
     {
@@ -42,6 +38,7 @@ public class Level2Manager : MonoBehaviour
         //defeatScreen = transform.GetChild(2).gameObject;
         timer.text = "30";
         gameplayUI.SetActive(true);
+        pauseUI.SetActive(false);
         defeatScreen.SetActive(false);
         EventManager.OnPlayerDefeat += DefeatScreen;
         EventManager.OnHpVariation += RefreshHPBar;
@@ -51,14 +48,16 @@ public class Level2Manager : MonoBehaviour
     void Update()
     {
         #region Level2UI
-        if (!GameManager.isGamePaused)
+        if (!GameManager.IsGamePaused)
         {
             timer.text = Mathf.RoundToInt(counter).ToString();
             gameplayUI.SetActive(true);
+            pauseUI.SetActive(false);
         }
         else
         {
             gameplayUI.SetActive(false);
+            pauseUI.SetActive(true);
         }
         #endregion
         if (counter <= 0)
@@ -67,7 +66,7 @@ public class Level2Manager : MonoBehaviour
             if (initScreen.GetComponent<CanvasGroup>().alpha == 1) GameManager.Instance.ChangeLevel(3);
         }
 
-        if (!GameManager.isGamePaused && initScreen.canvasGroup.alpha <= 0)
+        if (!GameManager.IsGamePaused && initScreen.canvasGroup.alpha <= 0)
         {
             enemyTimer += Time.deltaTime;
             boxTimer += Time.deltaTime;
@@ -88,11 +87,6 @@ public class Level2Manager : MonoBehaviour
                 boxTimer = 0;
             }
         }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (juegoPausado) Reanudar();
-            else Pausa();
-        }
     }
 
     public void EnemyKilled()
@@ -100,7 +94,11 @@ public class Level2Manager : MonoBehaviour
         if (timerChanger > 0.8f) timerChanger -= 0.1f;
     }
     #region Level2UI
-    
+    void PauseMenu()
+    {
+        gameplayUI.SetActive(!gameplayUI.activeSelf);
+        pauseUI.SetActive(!pauseUI.activeSelf);
+    }
 
     void DefeatScreen()
     {
@@ -118,33 +116,12 @@ public class Level2Manager : MonoBehaviour
     }
     public void Exit()
     {
-        SceneManager.LoadScene(0);
-        //Application.Quit();
+        Application.Quit();
     }
 
     void RefreshHPBar()
     {
-        playerFill.fillAmount = player.PlayerHealth / 100f;
+        playerFill.fillAmount = player.HealthController.MaxLife / 100f;
     }
     #endregion
-    public void Pausa()
-    {
-        juegoPausado = true;
-        Time.timeScale = 0f;
-        botonPausa.SetActive(false);
-        menuPausa.SetActive(true);
-    }
-    public void Reanudar()
-    {
-        juegoPausado = false;
-        Time.timeScale = 1f;
-        botonPausa.SetActive(true);
-        menuPausa.SetActive(false);
-    }
-    public void Reiniciar()
-    {
-        juegoPausado = false;
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
 }

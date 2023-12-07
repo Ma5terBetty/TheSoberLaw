@@ -1,13 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
-public class Level3Manager : MonoBehaviour, IObserver
+public class Level3Manager : MonoBehaviour
 {
     #region Level3UI
     [SerializeField] GameObject gameplayUI;
+    [SerializeField] GameObject pauseUI;
     [SerializeField] GameObject defeatScreen;
     [SerializeField] GameObject winnerScreen;
     [SerializeField] Player player;
@@ -23,15 +22,12 @@ public class Level3Manager : MonoBehaviour, IObserver
     public int currentDestination;
     public bool isReturning;
     int currentBossStage;
-    public Scriptableobject ScriptableObj;
-    //Menu de pausa
-    [SerializeField] private GameObject botonPausa;
-    [SerializeField] private GameObject menuPausa;
-    private bool juegoPausado = false;
+    public EnemiesOnLevelData ScriptableObj;
     void Start()
     {
         #region Level3UI
         gameplayUI.SetActive(true);
+        pauseUI.SetActive(false);
         defeatScreen.SetActive(false);
         winnerScreen.SetActive(false);
         bossLife.fillAmount = 1f;
@@ -47,26 +43,25 @@ public class Level3Manager : MonoBehaviour, IObserver
         {
             ScriptableObj.Bosses[i].SetActive(false);
         }
-        //observer
-        GameManager.Instance.AddObserver(this);
-
     }
     void Update()
     {
         #region Level3UI
-        //if (GameManager.Instance.isBossDefeated) winnerScreen.SetActive(true);
+        if (GameManager.Instance.isBossDefeated) winnerScreen.SetActive(true);
         bossLife.fillAmount = 1 - bossDamage / 100f;
-        if (GameManager.isGamePaused) gameplayUI.SetActive(false);
-        else gameplayUI.SetActive(true);
-
+        if (GameManager.IsGamePaused)
+        {
+            gameplayUI.SetActive(false);
+            pauseUI.SetActive(true);
+        }
+        else
+        {
+            gameplayUI.SetActive(true);
+            pauseUI.SetActive(false);
+        }
         #endregion
         if (initScreen.canvasGroup.alpha > 0) return;
         BossSetter();
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (juegoPausado) Reanudar();
-            else Pausa();
-        }
     }
 
     void BossSetter()
@@ -94,7 +89,7 @@ public class Level3Manager : MonoBehaviour, IObserver
 
     void ChangeBoss(GameObject defeatedBoss, GameObject newBoss)
     {
-        if (!newBoss.active)
+        if (!newBoss.activeSelf)
         {
             defeatedBoss.SetActive(false);
             newBoss.SetActive(true);
@@ -103,7 +98,7 @@ public class Level3Manager : MonoBehaviour, IObserver
 
     IEnumerator BossChanger(GameObject bossDefeated, GameObject newBoss)
     {
-        if (!newBoss.active)
+        if (!newBoss.activeSelf)
         {
             bossDefeated.SetActive(false);
             yield return new WaitForSeconds(2);
@@ -119,6 +114,7 @@ public class Level3Manager : MonoBehaviour, IObserver
     void PauseMenu()
     {
         gameplayUI.SetActive(!gameplayUI.activeSelf);
+        pauseUI.SetActive(!pauseUI.activeSelf);
     }
     void DefeatScreen()
     {
@@ -136,41 +132,11 @@ public class Level3Manager : MonoBehaviour, IObserver
     }
     public void Exit()
     {
-        SceneManager.LoadScene(0);
+        Application.Quit();
     }
     void RefreshHPBar()
     {
-        playerFill.fillAmount = player.PlayerHealth / 100f;
+        playerFill.fillAmount = player.HealthController.MaxLife / 100f;
     }
     #endregion
-    public void Pausa()
-    {
-        juegoPausado = true;
-        Time.timeScale = 0f;
-        botonPausa.SetActive(false);
-        menuPausa.SetActive(true);
-    }
-    public void Reanudar()
-    {
-        juegoPausado = false;
-        Time.timeScale = 1f;
-        botonPausa.SetActive(true);
-        menuPausa.SetActive(false);
-    }
-    public void Reiniciar()
-    {
-        juegoPausado = false;
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    //Observer
-    void OnDestroy() 
-    {
-        GameManager.Instance.RemoveObserver(this);
-    }
-    public void Notify() 
-    {
-        winnerScreen.SetActive(true);
-    }
 }

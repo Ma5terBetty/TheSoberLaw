@@ -1,18 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class IMoveable : MonoBehaviour
+public interface IMoveable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    Rigidbody2D Rigidbody { get; }
+    float MovementSpeed { get; }
+    float JumpForce { get; }
+    void Move();
+    void Jump();
 }

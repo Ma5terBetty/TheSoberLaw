@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
-public class Level1Manager : MonoBehaviour, IObserver
+public class Level1Manager : MonoBehaviour
 {
     #region Level1UI
     [SerializeField] GameObject gameplayUI;
+    [SerializeField] GameObject pauseUI;
     [SerializeField] GameObject defeatScreen;
     [SerializeField] Text counter;
     public Image hpFill;
@@ -18,50 +16,69 @@ public class Level1Manager : MonoBehaviour, IObserver
     GameObject[] enemiesOnStage;
     [SerializeField] Player player;
     public Text enemyCounter;
-    //Menu de pausa
-    [SerializeField] private GameObject botonPausa;
-    [SerializeField] private GameObject menuPausa;
-    private bool juegoPausado = false;
+
+    #region UNITY_FUNCTIONS
+    private void OnEnable()
+    {
+        EventManager.OnKilledEnemy += EnemyKilled;
+    }
+
     void Start()
     {
         #region Level1UI
         //defeatScreen = transform.GetChild(2).gameObject;
         gameplayUI.SetActive(true);
+        pauseUI.SetActive(false);
         defeatScreen.SetActive(false);
         EventManager.OnPlayerDefeat += DefeatScreen;
         EventManager.OnHpVariation += RefreshHPBar;
         #endregion
+
         GameManager.Instance.isLevel1Completed = false;
         enemiesOnStage = GameObject.FindGameObjectsWithTag("Enemy");
-        GetEnemiesAmount();
         enemyCounter = GameObject.FindGameObjectWithTag("Counter").GetComponent<Text>();
         enemyCounter.text = enemiesToDefeat.ToString();
-        EventManager.OnKilledEnemy += EnemyKilled;
-
-        GameManager.Instance.AddObserver(this);
+        GetEnemiesAmount();
     }
 
     void Update()
     {
+        #region Level1UI
+        if (GameManager.IsGamePaused)
+        {
+            gameplayUI.SetActive(false);
+            pauseUI.SetActive(true);
+        }
+        else
+        {
+            gameplayUI.SetActive(true);
+            pauseUI.SetActive(false);
+        }
+        #endregion
+
+
         if (initScreen.canvasGroup.alpha == 1 && GameManager.Instance.isLevel1Completed)
         {
             EventManager.OnKilledEnemy -= EnemyKilled;
             GameManager.Instance.ChangeLevel(2);
         }
         if (Input.GetKeyDown(KeyCode.Y)) GameManager.Instance.isLevel1Completed = true;
-        //Menu de pausa
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (juegoPausado) Reanudar();
-            else Pausa();
-        }
     }
+    private void OnDisable()
+    {
+        EventManager.OnKilledEnemy -= EnemyKilled;
+    }
+
+    #endregion
 
     void GetEnemiesAmount()
     {
         enemiesToDefeat = 0;
+
         for (int i = 0; i <= enemiesOnStage.Length - 1; i++)
+        {
             enemiesToDefeat++;
+        }
     }
 
     public void EnemyKilled()
@@ -69,19 +86,17 @@ public class Level1Manager : MonoBehaviour, IObserver
         enemiesToDefeat--;
         if (enemyCounter == null) enemyCounter = GameObject.FindGameObjectWithTag("Counter").GetComponent<Text>();
         enemyCounter.text = enemiesToDefeat.ToString();
-        //if (enemiesToDefeat == 0) GameManager.Instance.isLevel1Completed = true;
+        if (enemiesToDefeat == 0) GameManager.Instance.isLevel1Completed = true;
     }
 
-    private void OnDisable()
-    {
-        UnSuscribe();
-    }
-
-    void UnSuscribe()
-    {
-        EventManager.OnKilledEnemy -= EnemyKilled;
-    }
+    
     #region Level1UI
+    void PauseMenu()
+    {
+        if (gameplayUI == null) return;
+        gameplayUI.SetActive(!gameplayUI.activeSelf);
+        pauseUI.SetActive(!pauseUI.activeSelf);
+    }
     void DefeatScreen()
     {
         if (defeatScreen == null) return;
@@ -98,43 +113,12 @@ public class Level1Manager : MonoBehaviour, IObserver
     }
     public void Exit()
     {
-        SceneManager.LoadScene(0);
-        //Application.Quit();
+        Application.Quit();
     }
 
     void RefreshHPBar()
     {
-        hpFill.fillAmount = player.PlayerHealth / 100f;
+        hpFill.fillAmount = player.HealthController.MaxLife / 100f;
     }
     #endregion
-    public void Pausa()
-    {
-        juegoPausado = true;
-        Time.timeScale = 0f;
-        botonPausa.SetActive(false);
-        menuPausa.SetActive(true);
-    }
-    public void Reanudar()
-    {
-        juegoPausado = false;
-        Time.timeScale = 1f;
-        botonPausa.SetActive(true);
-        menuPausa.SetActive(false);
-    }
-    public void Reiniciar()
-    {
-        juegoPausado = false;
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    //Observer
-    void OnDestroy( ) 
-    {
-        GameManager.Instance.RemoveObserver(this);
-    }
-    public void Notify() 
-    {
-        GameManager.Instance.isLevel1Completed = true;
-    }
 }

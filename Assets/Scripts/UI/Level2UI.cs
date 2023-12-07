@@ -30,7 +30,7 @@ public class Level2UI : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.isGamePaused)
+        if (!GameManager.IsGamePaused)
         {
             timer.text = Mathf.RoundToInt(lvlManager.counter).ToString();
             gameplayUI.SetActive(true);
@@ -71,6 +71,6 @@ public class Level2UI : MonoBehaviour
 
     void RefreshHPBar()
     {
-        playerFill.fillAmount = player.PlayerHealth / 100f;
+        playerFill.fillAmount = player.HealthController.MaxLife / 100f;
     }
 }
