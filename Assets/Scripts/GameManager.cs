@@ -3,26 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Observer
 {
-    
+    #region Private Properties
+    private Player _player;
+    private LevelManager currentLevelManager;
+    [SerializeField]
+    private Scene currentScene;
+    [SerializeField]
+    private DifficultySO currentDifficulty;
+    private Vector3 startPos;
+    private bool isGameOver;
+    #endregion
+
+    #region Public Properties
     public static GameManager Instance;
-    [SerializeField] public GameObject player;
-    [SerializeField] Scene currentScene;
-    int currentLevel;
-    
-    private bool isAlive;
-    public bool dontDestroyOnLoad;
-    public bool isLevel1Completed;
-    public bool isLevel2Completed;
-    public bool isBossDefeated;
     public static bool IsGamePaused;
-    public bool gameOver;
 
+    public LevelManager LevelManager => currentLevelManager;
+    public DifficultySO DifficultyLevel => currentDifficulty;
+    public Player Player => _player;
+    public bool IsGameOver => isGameOver;
+    public bool dontDestroyOnLoad;
     public bool isLevelStarted;
+    public bool IsGameplayActive;
+    #endregion
 
-    Vector3 startPos;
-
+    #region Unity Functions
     private void Awake()
     {
         if (Instance == null)
@@ -38,16 +45,14 @@ public class GameManager : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-
-        player = GameObject.FindGameObjectWithTag("Player");
         startPos = GameObject.FindGameObjectWithTag("StartPos").GetComponent<Transform>().position;
 
         currentScene = SceneManager.GetActiveScene();
 
-        if (player != null)
+        if (_player != null)
         {
-            player.gameObject.SetActive(true);
-            player.transform.position = startPos;
+            _player.gameObject.SetActive(true);
+            _player.transform.position = startPos;
         }
     }
     void OnEnable()
@@ -56,44 +61,34 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        isLevel1Completed = false;
-        isLevel2Completed = false;
-        isBossDefeated = false;
-        isLevelStarted = false;
+        IsGameplayActive = false;
     }
-    private void Update()
+
+    void OnDisable()
     {
-        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (GameManager.IsGamePaused)
-            {
-                Unpause();
-            }
-            else
-            {
-                Pause();
-            }
-        }
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+    #endregion
+
+    #region Custom Functions
     /// <summary>
     /// Pauses the game by setting the Time.timeScale from 1f to 0f.
     /// </summary>
     public void Pause()
     {
-        Time.timeScale = 0;
-        IsGamePaused = true;
-    }
-    /// <summary>
-    /// Unpauses the game by setting the Time.timeScale from 0f to 1f.
-    /// </summary>
-    void Unpause()
-    {
-        Time.timeScale = 1.0f;
-        IsGamePaused = false;
+        if (IsGamePaused)
+        {
+            Time.timeScale = 1.0f;
+            IsGamePaused = false;
+        }
+        else
+        {
+            Time.timeScale = 0;
+            IsGamePaused = true;
+        }
     }
     public void LoadMainMenu()
     {
-        Unpause();
         SceneManager.LoadScene(0);
     }
     /// <summary>
@@ -103,7 +98,6 @@ public class GameManager : MonoBehaviour
     /// <returns>Load a new level scene</returns>
     public void ChangeLevel(int scene)
     {
-        Unpause();
         SceneManager.LoadScene(scene);
     }
     /// <summary>
@@ -111,18 +105,89 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void FindPlayer()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
     public void ExitGame()
     {
         Application.Quit();
     }
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        
+    public void GameOver()
+    { 
+        isGameOver = true;
+        IsGameplayActive = false;
     }
-    void OnDisable()
+
+    public void SetDifficulty(DifficultySO input)
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        currentDifficulty = input;
     }
+    public void SetCurrentLevelManager(LevelManager input)
+    { 
+        currentLevelManager = input;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            currentLevelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+            IsGamePaused = false;
+        }
+    }
+    public override void OnNotify(ObserverMessages message, params object[] args)
+    {
+        switch (message)
+        {
+            case ObserverMessages.GamePaused:
+                Pause();
+                break;
+            case ObserverMessages.GameOver:
+                GameOver();
+                break;
+            case ObserverMessages.GameplayActive:
+                IsGameplayActive = true;
+                break;
+            case ObserverMessages.StopGameplay:
+                IsGameplayActive = false;
+                break;
+        }
+    }
+    public void AddObservable(Subject subject, EventType input)
+    {
+        switch (input)
+        {
+            case EventType.GamePaused:
+                subject.RegisterObserver(this);
+                break;
+            case EventType.GameOver:
+                subject.RegisterObserver(this);
+                break;
+        }
+    }
+    public void RemoveObservable(Subject subject, EventType input)
+    {
+        switch (input)
+        {
+            case EventType.GamePaused:
+                subject.UnregisterObserver(this);
+                break;
+            case EventType.GameOver:
+                subject.UnregisterObserver(this);
+                break;
+        }
+    }
+
+    public void LoadNextLevel(string level)
+    {
+        switch (level)
+        {
+            case "Level_1":
+                SceneManager.LoadScene("Level_2");
+                break;
+            case "Level_2":
+                SceneManager.LoadScene("Level_3");
+                break;
+        }
+    }
+    #endregion
 }

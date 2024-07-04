@@ -39,7 +39,7 @@ public class EventManager : MonoBehaviour
     public void PlayerDefeated()
     {
         OnPlayerDefeat();
-        GameManager.Instance.player.SetActive(false);
+        GameManager.Instance.Player.gameObject.SetActive(false);
     }
     public void HpChanged()
     { 

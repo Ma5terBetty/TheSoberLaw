@@ -10,6 +10,9 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField] private GameObject credits;
     [SerializeField] private GameObject levelsButtons;
+    [SerializeField] private GameObject difficultyButtons;
+    private int levelToLoad;
+    private int difficultyLevel;
 
     private void Awake()
     {
@@ -23,18 +26,26 @@ public class MainMenuManager : MonoBehaviour
     {
         credits.SetActive(!credits.activeSelf);
     }
-    public void LoadLevel1()
-    {
-        GameManager.Instance.ChangeLevel(1);
+    public void ToggleDifficulty()
+    { 
+        difficultyButtons.SetActive(!difficultyButtons.activeSelf);
     }
-    public void LoadLevel2()
+    public void SelectLevel(int input)
     {
-        GameManager.Instance.ChangeLevel(2);
+        levelToLoad = input;
+        ToggleDifficulty();
+        ToggleLevels();
     }
-    public void LoadLevel3()
-    {
-        GameManager.Instance.ChangeLevel(3);
+    public void SelectDifficulty(DifficultySO input)
+    { 
+        GameManager.Instance.SetDifficulty(input);
+        LoadLevel();
     }
+    void LoadLevel()
+    { 
+        GameManager.Instance.ChangeLevel(levelToLoad);
+    }
+
     public void ToggleLevels()
     { 
         levelsButtons.SetActive(!levelsButtons.activeSelf);

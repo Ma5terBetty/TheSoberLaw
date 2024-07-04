@@ -5,16 +5,16 @@ using UnityEngine.Events;
 
 public class CameraScript : MonoBehaviour
 {
-    private GameObject player;
+    private Transform player;
     private void Start()
     {
-        if (GameManager.Instance.player == null)
+        if (GameManager.Instance.Player == null)
         {
             GameManager.Instance.FindPlayer();
-            player = GameManager.Instance.player;
+            player = GameManager.Instance.Player.transform;
         }
 
-        player = GameManager.Instance.player;
+        player = GameManager.Instance.Player.transform;
     }
     // Update is called once per frame
     void Update()
@@ -24,7 +24,7 @@ public class CameraScript : MonoBehaviour
 
     void FollowPlayer()
     {
-        if (GameManager.Instance.player != null)
+        if (GameManager.Instance.Player != null)
         {
             if (player.transform.position.x >= -2.4 && player.transform.position.x <= 121)
             {

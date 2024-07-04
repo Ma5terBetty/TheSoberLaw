@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BoxScript : MonoBehaviour
 {
@@ -8,7 +6,6 @@ public class BoxScript : MonoBehaviour
     BoxCollider2D _BoxCollider;
     Rigidbody2D _rigidBody;
     float _VanishTimer;
-    //float _alpha;
     Color _initColor;
     public bool isGrounded;
 
@@ -23,7 +20,6 @@ public class BoxScript : MonoBehaviour
     {
         isGrounded = false;
         _initColor = _spriteRenderer.color;
-    //    _alpha = 1;
         _VanishTimer = 0;
     }
 

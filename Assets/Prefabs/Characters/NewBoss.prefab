@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8973079437586092205}
   - component: {fileID: 1881740301883907719}
   - component: {fileID: 5055245392516519948}
+  - component: {fileID: -118517276289690807}
   m_Layer: 10
   m_Name: NewBoss
   m_TagString: Boss
@@ -173,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterStats: {fileID: 11400000, guid: e6e0394176f3d634989c163eb156587a, type: 2}
-  _weapon: {fileID: 2625094979664847698}
+  _currentWeapon: {fileID: 0}
   _whiskeyGO: {fileID: 0}
 --- !u!114 &1881740301883907719
 MonoBehaviour:
@@ -187,10 +188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c35ba8976a9e8a4aa277cfafe82559d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pistolAnimations: {fileID: 9100000, guid: e0451149527a5214ba550d782daf80e8, type: 2}
-  _shotunAnimations: {fileID: 9100000, guid: 80f78a5151e41484091cfd1bb803beec, type: 2}
-  _submachineAnimations: {fileID: 9100000, guid: dc99b9c18c8b1d54aa16f45519c71834,
-    type: 2}
 --- !u!114 &5055245392516519948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +204,19 @@ MonoBehaviour:
   - {fileID: 8748015506049334211, guid: 440ef3d069df64a4ea05ac8932d905b4, type: 3}
   - {fileID: 8748015506049334211, guid: ae460978f08b71c40a689561aa69bba8, type: 3}
   - {fileID: 8748015506049334211, guid: 4522c32162de1154482fa164a3bdeae4, type: 3}
+--- !u!114 &-118517276289690807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3375116352346822253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 228b427d14ed9284fab2cd5dc5712dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _observers: []
 --- !u!1001 &719591980342642884
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -222,7 +232,7 @@ PrefabInstance:
     - target: {fileID: 6808831162753476678, guid: 440ef3d069df64a4ea05ac8932d905b4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.294
+      value: 0.496
       objectReference: {fileID: 0}
     - target: {fileID: 6808831162753476678, guid: 440ef3d069df64a4ea05ac8932d905b4,
         type: 3}
@@ -276,18 +286,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 440ef3d069df64a4ea05ac8932d905b4, type: 3}
---- !u!114 &2625094979664847698 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3283886013526485910, guid: 440ef3d069df64a4ea05ac8932d905b4,
-    type: 3}
-  m_PrefabInstance: {fileID: 719591980342642884}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8db939c5152ed8643bf13670565f0ad2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &6305411980094922882 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6808831162753476678, guid: 440ef3d069df64a4ea05ac8932d905b4,

@@ -12,7 +12,5 @@ public class WhiskeyTrigger : MonoBehaviour
         {
             boss.TurnOnWhiskey();
         }
-
-        print("algo se toco");
     }
 }

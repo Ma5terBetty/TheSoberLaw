@@ -1,12 +1,15 @@
 using System;
+using System.Collections;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class Enemy : BaseCharacter, IDamageable, IShooter
 {
     #region PRIVATE_PROPERTIES
     [SerializeField] private BaseWeapon _weapon;
-    private HealthController _healthController = new HealthController();
+    private HealthController _healthController;
     private Rigidbody2D _rigidbody;
+    private AudioSource _audioSource;
     [SerializeField] private float _SightDistance = 3f;
     [SerializeField] private float _patrolDistance;
     [SerializeField] private bool _isPatrolling;
@@ -24,7 +27,6 @@ public class Enemy : BaseCharacter, IDamageable, IShooter
     #region PUBLIC_PROPERTIES
     public HealthController HealthController => _healthController;
     public BaseWeapon BaseWeapon => _weapon;
-    public bool IsPlayer() => _isPlayer;
     public bool IsAttacking => _isAttacking;
     public bool IsGrounded => _isGrounded;
     public bool IsMoving => _isMoving;
@@ -33,36 +35,42 @@ public class Enemy : BaseCharacter, IDamageable, IShooter
     #region UNITY_FUNCTIONS
     private void Awake()
     {
+        _healthController = GetComponent<HealthController>();
+        _audioSource = GetComponent<AudioSource>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _isPlayer = GetComponent<Player>() == null ? false : true;
     }
     void Start()
     {
-        _healthController.Initialize(MaxLife);
+        _healthController.Initialize(MaxLife * GameManager.Instance.DifficultyLevel.EnemiesMaxLife);
         transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
         _isMoving = true;
         _isLookingForward = true;
         _isGrounded = false;
         _initialPosition = transform.position;
         if (_patrolDistance > 0) _isPatrolling = true;
+
+        UI_Controller.Instance.AddObservable(HealthController, UI_ElementType.ScoreCounter);
     }
     void Update()
     {
-        if (GameManager.IsGamePaused) return;
-        if (_healthController.CurrentLife <= 0)
-        {
-            EventManager.Instance.EnemyKilled();
-            Destroy(this.gameObject);
-        }
+        if (GameManager.IsGamePaused || !GameManager.Instance.IsGameplayActive) return;
 
         if (IsPlayerInSight())
         {
             Shoot();
         }
+
+
+        //Testing
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            GetDamage(500);
+        }
     }
     private void FixedUpdate()
     {
-        if (GameManager.IsGamePaused) return;
+        if (GameManager.IsGamePaused || !GameManager.Instance.IsGameplayActive) return;
         if (!IsGrounded) return;
 
         if (_isMoving)
@@ -72,7 +80,7 @@ public class Enemy : BaseCharacter, IDamageable, IShooter
     }
     private void LateUpdate()
     {
-        if (GameManager.IsGamePaused) return;
+        if (GameManager.IsGamePaused || !GameManager.Instance.IsGameplayActive) return;
         if (!IsGrounded) return;
 
         if (_isPatrolling)
@@ -86,6 +94,11 @@ public class Enemy : BaseCharacter, IDamageable, IShooter
         }
 
         CheckBorders();
+    }
+
+    private void OnDisable()
+    {
+        UI_Controller.Instance.RemoveObservable(HealthController, UI_ElementType.ScoreCounter);
     }
     #endregion
 
@@ -104,7 +117,6 @@ public class Enemy : BaseCharacter, IDamageable, IShooter
             if (bullet.IsFromPlayer)
             {
                 GetDamage(bullet.DamageAmount);
-                print($"{HealthController.CurrentLife}");
                 other.gameObject.GetComponent<PrefabBullet>().DestroyBullet();
 
                 if (!_isAttacking)
@@ -119,14 +131,18 @@ public class Enemy : BaseCharacter, IDamageable, IShooter
     #region CUSTOM_FUNCTIONS
     public void GetDamage(float damageAmount)
     {
+        _audioSource.Play();
+
         _healthController.GetDamage(damageAmount);
+
         if (_healthController.CurrentLife <= 0)
         {
-            var playerHC = GameManager.Instance.player.GetComponent<HealthController>();
+            var playerHC = GameManager.Instance.Player.HealthController;
             if (playerHC.CurrentLife <= playerHC.MaxLife / 4)
             {
                 Instantiate(_health, transform.position, Quaternion.identity);
             }
+            GameManager.Instance.LevelManager.EnemyKilled();
             Destroy(this.gameObject);
         }
     }
@@ -151,8 +167,18 @@ public class Enemy : BaseCharacter, IDamageable, IShooter
     }
     private void Move()
     {
-        if (_isLookingForward) _rigidbody.position += new Vector2(MovementSpeed * Time.deltaTime, 0);
-        else _rigidbody.position -= new Vector2(MovementSpeed * Time.deltaTime, 0);
+        float temp = MovementSpeed * Time.deltaTime * GameManager.Instance.DifficultyLevel.EnemiesMovement;
+        if (_isLookingForward) _rigidbody.position += new Vector2(temp, 0);
+        else _rigidbody.position -= new Vector2(temp, 0);
+    }
+    public void SetWeapon(GameObject input)
+    {
+        Vector3 pos = _weapon.transform.position;
+        Destroy(_weapon.gameObject);
+        GameObject newWeapon = Instantiate(input, _weapon.transform.position, Quaternion.identity);
+        _weapon = newWeapon.GetComponent<BaseWeapon>();
+        newWeapon.transform.position = pos;
+        newWeapon.transform.parent = this.transform;
     }
     public bool IsPlayerInSight()
     {

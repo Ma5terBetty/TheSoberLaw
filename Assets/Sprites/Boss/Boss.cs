@@ -3,7 +3,7 @@ using UnityEngine;
 public class Boss : BaseCharacter, IDamageable, IShooter
 {
     #region PRIVATE_PROPERTIES
-    private HealthController _healthController = new HealthController();
+    private HealthController _healthController;
     [SerializeField] private BaseWeapon _currentWeapon;
     [SerializeField] private GameObject _whiskeyGO;
     private Rigidbody2D _rigidbody;
@@ -23,7 +23,6 @@ public class Boss : BaseCharacter, IDamageable, IShooter
     #region PUBLIC_PROPERTIES
     public HealthController HealthController => _healthController;
     public BaseWeapon BaseWeapon => _currentWeapon;
-    public bool IsPlayer() => _isPlayer;
     public bool IsAttacking => _isAttacking;
     #endregion
 
@@ -33,6 +32,7 @@ public class Boss : BaseCharacter, IDamageable, IShooter
         _rigidbody = GetComponent<Rigidbody2D>();
         _isPlayer = GetComponent<Player>() == null ? false : true;
         _weaponChanger = GetComponent<WeaponChanger>();
+        _healthController = GetComponent<HealthController>();
     }
     private void Start()
     {
@@ -40,10 +40,12 @@ public class Boss : BaseCharacter, IDamageable, IShooter
         _bossLevel = 0;
         _isAttacking = true;
         _isLookingForward = true;
+
+        UI_Controller.Instance.AddObservable(_healthController, UI_ElementType.BossHealth);
     }
     private void Update()
     {
-        if (GameManager.IsGamePaused) return;
+        if (GameManager.IsGamePaused || GameManager.Instance.IsGameOver) return;
 
         if (_isThrowingWhisky)
         {
@@ -56,7 +58,7 @@ public class Boss : BaseCharacter, IDamageable, IShooter
     }
     private void FixedUpdate()
     {
-        if (GameManager.IsGamePaused) return;
+        if (GameManager.IsGamePaused || GameManager.Instance.IsGameOver) return;
 
         if (_isAttacking)
         {
@@ -96,9 +98,9 @@ public class Boss : BaseCharacter, IDamageable, IShooter
         }
         if (HealthController.CurrentLife <= 0)
         { 
-            GameManager.Instance.isBossDefeated = true;
             Destroy(this.gameObject);
         }
+        _healthController.UpdateBossStatus();
     }
     public void Shoot()
     {
@@ -139,7 +141,7 @@ public class Boss : BaseCharacter, IDamageable, IShooter
     }
     void Move(float speedVariation)
     {
-        speedVariation += MovementSpeed;
+        speedVariation += MovementSpeed * GameManager.Instance.DifficultyLevel.EnemiesMovement;
         if (_isLookingForward) _rigidbody.position += new Vector2(speedVariation * Time.deltaTime, 0);
         else _rigidbody.position -= new Vector2(speedVariation * Time.deltaTime, 0);
     }

@@ -15,8 +15,8 @@ public class WhiskeyScript : MonoBehaviour
 
     void Start()
     {
-        spawnAim = GameManager.Instance.player.transform.position - transform.position;
-        diff = (GameManager.Instance.player.transform.position - transform.position).magnitude / 100;
+        spawnAim = GameManager.Instance.Player.transform.position - transform.position;
+        diff = (GameManager.Instance.Player.transform.position - transform.position).magnitude / 100;
         rb.AddForce(new Vector2(spawnAim.x, spawnAim.y + 6), ForceMode.Impulse);
     }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HealthController
+public class HealthController: Subject
 {
     #region PRIVATE_PROPERTIES
     private float _maxLife;
@@ -18,6 +18,7 @@ public class HealthController
     { 
         _maxLife = maxLife;
         _currentLife = MaxLife;
+        UpdateStatus();
     }
     public void Kill()
     {
@@ -30,7 +31,9 @@ public class HealthController
         if (_currentLife < 0 )
         {
             _currentLife = 0;
+            Notify(ObserverMessages.GameOver);
         }
+        UpdateStatus();
     }
     public void GetHealing(float healAmount)
     {
@@ -39,6 +42,21 @@ public class HealthController
         if (_currentLife > MaxLife)
         { 
             _currentLife = MaxLife;
+        }
+        UpdateStatus();
+    }
+
+    private void UpdateStatus()
+    {
+        Notify(ObserverMessages.UpdatePlayerHP, _currentLife/MaxLife);
+    }
+
+    public void UpdateBossStatus()
+    {
+        Notify(ObserverMessages.UpdateBossHP, _currentLife / MaxLife);
+        if (_currentLife <= 0)
+        {
+            Notify(ObserverMessages.GameWon);
         }
     }
     #endregion
